@@ -1,0 +1,28 @@
+{
+  "home-page": "Home Page",
+  "message": {
+    "warning": {
+      "verify-network-connection": "Please check your internet connection"
+    },
+    "success": {
+      "authentication": "You have successfully authenticated"
+    },
+    "error": {
+      "invalid-credentials": "Authentication failed due to invalid credentials"
+    },
+    "info": {
+      "email-or-password-missing": "Please provide an Email and a Password"
+    }
+  },
+  "authentication": {
+    "login": "Login",
+    "email": "E-mail",
+    "password": "Password",
+    "register": "Register"
+  },
+  "nav": {
+    "home": "Home",
+    "logout": "Logout",
+    "login": "Login"
+  }
+}

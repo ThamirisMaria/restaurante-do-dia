@@ -1,0 +1,28 @@
+{
+  "home-page": "Página Inicial",
+  "authentication": {
+    "register": "Cadastrar",
+    "login": "Entrar",
+    "email": "E-mail",
+    "password": "Senha"
+  },
+  "message": {
+    "error": {
+      "invalid-credentials": "A autenticação falhou devido à credenciais inválidas"
+    },
+    "info": {
+      "email-or-password-missing": "Por favor, preencha os campos de Email e Senha"
+    },
+    "warning": {
+      "verify-network-connection": "Por favor, verifique sua conexão com a internet"
+    },
+    "success": {
+      "authentication": "Você autenticou com sucesso"
+    }
+  },
+  "nav": {
+    "home": "Início",
+    "logout": "Sair",
+    "login": "Entrar"
+  }
+}

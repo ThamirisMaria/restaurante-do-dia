@@ -5,6 +5,7 @@ import { Button, Container, Form } from "react-bootstrap";
 import { authenticateRequest } from "@/lib/requests";
 import { Message, MessageProps } from "@/components/ui/Message";
 import { useAuth } from "@/hooks";
+import { t } from "i18next";
 
 type InputRefs = {
   email: React.RefObject<HTMLInputElement>;
@@ -37,7 +38,7 @@ export function AuthenticateUserPage() {
     if (!email || !password) {
       setMessage({
         type: "INFO",
-        description: "Por favor, preencha os campos de Email e Senha",
+        description: t("message.info.email-or-password-missing"),
       });
       return;
     }
@@ -49,13 +50,13 @@ export function AuthenticateUserPage() {
         case "UNEXCEPTED_ERROR":
           setMessage({
             type: "ERROR",
-            description: "A autenticação falhou devido à credenciais invalidas",
+            description: t("message.error.invalid-credentials"),
           });
           break;
         case "NETWORK_CONNECTION_ISSUE":
           setMessage({
             type: "WARNING",
-            description: "Por favor, verifique sua conexão com a internet",
+            description: t("message.warning.verify-network-connection"),
           });
           break;
       }
@@ -63,7 +64,7 @@ export function AuthenticateUserPage() {
     if (response) {
       setMessage({
         type: "SUCCESS",
-        description: "Você autenticou com sucesso",
+        description: t("message.success.authentication"),
       });
       setTimeout(function () {
         updateAccessToken(response.token);
@@ -74,11 +75,11 @@ export function AuthenticateUserPage() {
 
   return (
     <Container>
-      <h1>Entrar</h1>
+      <h1>{t("authentication.login")}</h1>
       {message && <Message {...message} />}
       <Form method="POST" onSubmit={handleFormSubmit}>
         <Form.Group className="mb-3">
-          <Form.Label htmlFor="email">Email:</Form.Label>
+          <Form.Label htmlFor="email">{t("authentication.email")}:</Form.Label>
           <Form.Control
             type="text"
             name="email"
@@ -87,7 +88,9 @@ export function AuthenticateUserPage() {
           />
         </Form.Group>
         <Form.Group className="mb-3">
-          <Form.Label htmlFor="password">Password:</Form.Label>
+          <Form.Label htmlFor="password">
+            {t("authentication.password")}:
+          </Form.Label>
           <Form.Control
             type="password"
             name="password"
@@ -97,7 +100,7 @@ export function AuthenticateUserPage() {
         </Form.Group>
         <Form.Group>
           <Button type="submit" variant="success">
-            Entrar
+            {t("authentication.login")}
           </Button>
         </Form.Group>
       </Form>
