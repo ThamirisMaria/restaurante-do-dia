@@ -46,7 +46,8 @@ public class User implements UserDetails {
     @NotBlank(message = "Password is mandatory")
     private String password;
 
-    public User(String email, String password) {
+    public User(String name, String email, String password) {
+        this.name = name;
         this.email = email;
         this.password = password;
     }
