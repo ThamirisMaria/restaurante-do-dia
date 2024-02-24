@@ -39,7 +39,8 @@ public class User implements UserDetails {
     private String name;
 
     @Column
-    @Email(message = "Email is mandatory")
+    @NotBlank(message = "Email is mandatory")
+    @Email(message = "User must provide a valid e-mail")
     private String email;
 
     @Column
