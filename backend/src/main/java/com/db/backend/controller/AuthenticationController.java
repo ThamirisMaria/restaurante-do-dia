@@ -32,7 +32,7 @@ public class AuthenticationController {
     private JwtService jwtService;
 
     @PostMapping("/login")
-    public ResponseEntity login(@RequestBody @Valid UserAuthenticationRequestDTO data) {
+    public ResponseEntity<UserRegistrationResponseDTO> login(@RequestBody @Valid UserAuthenticationRequestDTO data) {
         var usernamePassword = new UsernamePasswordAuthenticationToken(data.email(), data.password());
         var auth = this.authenticationManager.authenticate(usernamePassword);
         var token = this.jwtService.generate((User) auth.getPrincipal());
@@ -40,7 +40,7 @@ public class AuthenticationController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity register(@RequestBody @Valid UserRegistrationRequestDTO data) {
+    public ResponseEntity<ResponseEntity.BodyBuilder> register(@RequestBody @Valid UserRegistrationRequestDTO data) {
         if (this.repository.findByEmail(data.email()) != null) {
             return ResponseEntity.badRequest().build();
         }

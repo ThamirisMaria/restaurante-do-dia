@@ -13,6 +13,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -30,9 +32,11 @@ public class User implements UserDetails {
     private Long id;
 
     @Column
+    @Email(message = "Email is mandatory")
     private String email;
 
     @Column
+    @NotBlank(message = "Password is mandatory")
     private String password;
 
     public User(String email, String password) {
