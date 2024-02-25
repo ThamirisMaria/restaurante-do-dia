@@ -25,10 +25,12 @@ import com.db.backend.entity.User;
 import com.db.backend.infra.security.JwtService;
 import com.db.backend.repository.UserRepository;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("auth")
+@Tag(name = "Authentication")
 public class AuthenticationController {
     @Autowired
     private AuthenticationManager authenticationManager;
