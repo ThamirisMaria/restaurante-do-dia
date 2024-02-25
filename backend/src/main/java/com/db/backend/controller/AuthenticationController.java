@@ -25,6 +25,9 @@ import com.db.backend.entity.User;
 import com.db.backend.infra.security.JwtService;
 import com.db.backend.repository.UserRepository;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 
@@ -41,6 +44,11 @@ public class AuthenticationController {
     @Autowired
     private JwtService jwtService;
 
+    @Operation(summary = "Login user", method = "POST")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "User successfully authenticated"),
+            @ApiResponse(responseCode = "401", description = "Authentication failed due to invalid credentials")
+    })
     @PostMapping("/login")
     public ResponseEntity<UserRegistrationResponseDTO> login(@RequestBody @Valid UserAuthenticationRequestDTO data) {
         var usernamePassword = new UsernamePasswordAuthenticationToken(data.email(), data.password());
@@ -49,6 +57,12 @@ public class AuthenticationController {
         return ResponseEntity.ok(new UserRegistrationResponseDTO(token));
     }
 
+    @Operation(summary = "Register user", method = "POST")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "User created successfully"),
+            @ApiResponse(responseCode = "400", description = "Registration failed due to invalid credentials"),
+            @ApiResponse(responseCode = "409", description = "E-mail already in use")
+    })
     @PostMapping("/register")
     public ResponseEntity<String> register(@RequestBody @Valid UserRegistrationRequestDTO data) {
         if (this.repository.findByEmail(data.email()) != null) {
