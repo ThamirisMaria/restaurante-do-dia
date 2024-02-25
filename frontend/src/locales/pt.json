@@ -1,14 +1,11 @@
 {
   "home-page": "Página Inicial",
-  "authentication": {
-    "register": "Cadastrar",
-    "login": "Entrar",
-    "email": "E-mail",
-    "password": "Senha"
-  },
   "message": {
     "error": {
-      "invalid-credentials": "A autenticação falhou devido à credenciais inválidas"
+      "invalid-credentials": {
+        "login": "A autenticação falhou devido à credenciais inválidas",
+        "signup": "E-mail já cadastrado"
+      }
     },
     "info": {
       "email-or-password-missing": "Por favor, preencha os campos de Email e Senha"
@@ -17,12 +14,42 @@
       "verify-network-connection": "Por favor, verifique sua conexão com a internet"
     },
     "success": {
+      "signup": "Usuário cadastrado com sucesso",
       "authentication": "Você autenticou com sucesso"
+    }
+  },
+  "authentication": {
+    "login": "Entrar",
+    "email": "E-mail",
+    "password": "Senha",
+    "signup": "Cadastrar",
+    "name": "Nome",
+    "last-name": "Sobrenome",
+    "validation": {
+      "missing": {
+        "name": "Digite seu nome!",
+        "last-name": "Digite seu sobrenome!",
+        "email": "Digite seu e-mail!",
+        "password": "Digite sua senha!"
+      },
+      "invalid": {
+        "name": "Nome inválido!",
+        "last-name": "Sobrenome inválido!",
+        "email": "Digite um e-mail inválido!",
+        "password": "Senha precisa ter entre 8 e 12 caracteres"
+      }
+    },
+    "placeholder": {
+      "name": "João",
+      "last-name": "da Silva",
+      "email": "joaodasilva@exemplo.ocm",
+      "password": "********"
     }
   },
   "nav": {
     "home": "Início",
-    "logout": "Sair",
-    "login": "Entrar"
+    "signout": "Sair",
+    "login": "Entrar",
+    "signup": "Cadastrar"
   }
 }

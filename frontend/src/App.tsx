@@ -7,14 +7,15 @@ import "./App.css";
 import { Navigation } from "./components/ui/Navigation";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { SignUpUserPage } from "./pages/SignUpUserPage";
 
 export function App() {
   const { i18n } = useTranslation();
 
+  const lng = navigator.language;
   useEffect(() => {
-    const lng = navigator.language;
     i18n.changeLanguage(lng);
-  }, []);
+  }, [lng]);
 
   return (
     <Router>
@@ -22,6 +23,7 @@ export function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<AuthenticateUserPage />} />
+        <Route path="/signup" element={<SignUpUserPage />} />
       </Routes>
     </Router>
   );

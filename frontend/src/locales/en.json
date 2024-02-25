@@ -5,10 +5,14 @@
       "verify-network-connection": "Please check your internet connection"
     },
     "success": {
+      "signup": "You have successfully sign up",
       "authentication": "You have successfully authenticated"
     },
     "error": {
-      "invalid-credentials": "Authentication failed due to invalid credentials"
+      "invalid-credentials": {
+        "login": "Authentication failed due to invalid credentials",
+        "signup": "E-mail already in use"
+      }
     },
     "info": {
       "email-or-password-missing": "Please provide an Email and a Password"
@@ -18,11 +22,34 @@
     "login": "Login",
     "email": "E-mail",
     "password": "Password",
-    "register": "Register"
+    "signup": "Sign Up",
+    "name": "First Name",
+    "last-name": "Last Name",
+    "validation": {
+      "missing": {
+        "name": "Name  required!",
+        "last-name": "Last name required!",
+        "email": "E-mail required!",
+        "password": "Password required!"
+      },
+      "invalid": {
+        "name": "Invalid name!",
+        "last-name": "Invalid last name!",
+        "email": "Enter a valid e-mail!",
+        "password": "Password must be between 8 and 12 characters"
+      }
+    },
+    "placeholder": {
+      "name": "Jhon",
+      "last-name": "Doe",
+      "email": "jhondoe@exemple.com",
+      "password": "********"
+    }
   },
   "nav": {
     "home": "Home",
-    "logout": "Logout",
-    "login": "Login"
+    "signout": "Sign out",
+    "login": "Login",
+    "signup": "Sign Up"
   }
 }

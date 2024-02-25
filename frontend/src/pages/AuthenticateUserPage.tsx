@@ -1,11 +1,12 @@
 import { FormEvent, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Button, Container, Form } from "react-bootstrap";
 
 import { authenticateRequest } from "@/lib/requests";
 import { Message, MessageProps } from "@/components/ui/Message";
 import { useAuth } from "@/hooks";
-import { t } from "i18next";
+import { useTranslation } from "react-i18next";
+import { Button, Heading, VStack } from "@chakra-ui/react";
+import { Form } from "react-bootstrap";
 
 type InputRefs = {
   email: React.RefObject<HTMLInputElement>;
@@ -13,9 +14,11 @@ type InputRefs = {
 };
 
 export function AuthenticateUserPage() {
+  const { t } = useTranslation();
   const { updateAccessToken } = useAuth();
   const [message, setMessage] = useState<MessageProps | null>(null);
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   const inputRefs: InputRefs = {
     email: useRef<HTMLInputElement>(null),
@@ -29,6 +32,7 @@ export function AuthenticateUserPage() {
     if (inputRefs.password.current) {
       inputRefs.password.current.value = "";
     }
+    setLoading(false);
   };
 
   const handleFormSubmit = async (event: FormEvent) => {
@@ -40,6 +44,7 @@ export function AuthenticateUserPage() {
         type: "INFO",
         description: t("message.info.email-or-password-missing"),
       });
+      setLoading(false);
       return;
     }
     const [error, response] = await authenticateRequest(email, password);
@@ -50,7 +55,7 @@ export function AuthenticateUserPage() {
         case "UNEXCEPTED_ERROR":
           setMessage({
             type: "ERROR",
-            description: t("message.error.invalid-credentials"),
+            description: t("message.error.invalid-credentials.login"),
           });
           break;
         case "NETWORK_CONNECTION_ISSUE":
@@ -74,10 +79,16 @@ export function AuthenticateUserPage() {
   };
 
   return (
-    <Container>
-      <h1>{t("authentication.login")}</h1>
+    <VStack>
+      <Heading as="h1">{t("authentication.login")}</Heading>
       {message && <Message {...message} />}
-      <Form method="POST" onSubmit={handleFormSubmit}>
+      <Form
+        method="POST"
+        onSubmit={(e) => {
+          setLoading(true);
+          handleFormSubmit(e);
+        }}
+      >
         <Form.Group className="mb-3">
           <Form.Label htmlFor="email">{t("authentication.email")}:</Form.Label>
           <Form.Control
@@ -99,11 +110,16 @@ export function AuthenticateUserPage() {
           />
         </Form.Group>
         <Form.Group>
-          <Button type="submit" variant="success">
+          <Button
+            colorScheme="blue"
+            variant="solid"
+            isLoading={loading}
+            type="submit"
+          >
             {t("authentication.login")}
           </Button>
         </Form.Group>
       </Form>
-    </Container>
+    </VStack>
   );
 }

@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
-import { Button } from "react-bootstrap";
-import { t } from "i18next";
+import { useTranslation } from "react-i18next";
+import { Button } from "@chakra-ui/react";
 
 export function Navigation() {
+  const { t } = useTranslation();
   const { accessToken, updateAccessToken } = useAuth();
 
   const logout = () => {
@@ -14,12 +15,15 @@ export function Navigation() {
     <nav className="p-4">
       <Link to="/">{t("nav.home")}</Link> |
       {accessToken ? (
-        <Button variant="link" className="p-0" onClick={logout}>
-          {t("nav.logout")}
+        <Button variant="link" onClick={logout}>
+          {t("nav.signout")}
         </Button>
       ) : (
-        <Link to="/login">{t("nav.login")}</Link>
-      )}
+        <>
+          <Link to="/login">{t("nav.login")}</Link> |
+          <Link to="/signup">{t("nav.signup")}</Link>
+        </>
+      )}{" "}
     </nav>
   );
 }
