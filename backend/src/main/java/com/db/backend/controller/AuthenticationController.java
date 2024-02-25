@@ -50,12 +50,12 @@ public class AuthenticationController {
     @PostMapping("/register")
     public ResponseEntity<String> register(@RequestBody @Valid UserRegistrationRequestDTO data) {
         if (this.repository.findByEmail(data.email()) != null) {
-            return ResponseEntity.badRequest().body("E-mail already in use");
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("E-mail already in use");
         }
         String encryptedPassword = new BCryptPasswordEncoder().encode(data.password());
         User newUser = new User(data.name(), data.email(), encryptedPassword);
         this.repository.save(newUser);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.status(HttpStatus.CREATED).body("User created successfully");
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
