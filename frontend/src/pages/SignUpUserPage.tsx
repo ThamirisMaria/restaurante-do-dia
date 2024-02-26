@@ -1,4 +1,4 @@
-import { Button, HStack, Heading, VStack } from "@chakra-ui/react";
+import { Button, Heading, VStack } from "@chakra-ui/react";
 import { Formik, FormikHelpers, FormikProps } from "formik";
 import TextField from "./../components/ui/TextField";
 import { useTranslation } from "react-i18next";
@@ -85,7 +85,9 @@ export const SignUpUserPage = () => {
     >
       {(props: FormikProps<Values>) => (
         <VStack>
-          <Heading as="h1">{t("authentication.signup")}</Heading>
+          <Heading fontSize={{ base: "30px", sm: "40px", md: "45px" }} as="h1">
+            {t("authentication.signup")}
+          </Heading>
           {message && <Message {...message} />}
           <VStack
             as="form"
@@ -96,7 +98,7 @@ export const SignUpUserPage = () => {
             }}
             padding={5}
           >
-            <HStack>
+            <VStack flexDirection={{ base: "column", sm: "row" }}>
               <TextField
                 label={t("authentication.name")}
                 name="name"
@@ -107,7 +109,7 @@ export const SignUpUserPage = () => {
                 name="lastname"
                 placeholder={t("authentication.placeholder.last-name")}
               ></TextField>
-            </HStack>
+            </VStack>
             <TextField
               label={t("authentication.email")}
               name="email"
@@ -121,6 +123,9 @@ export const SignUpUserPage = () => {
               placeholder={t("authentication.placeholder.password")}
             ></TextField>
             <Button
+              fontSize={{ base: "22px", md: "24px" }}
+              h={{ base: "48px", md: "50px" }}
+              w={{ base: "140px", sm: "180px", md: "190px" }}
               type="submit"
               colorScheme="blue"
               variant="solid"

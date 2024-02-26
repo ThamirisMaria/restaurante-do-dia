@@ -27,15 +27,15 @@
     "last-name": "Last Name",
     "validation": {
       "missing": {
-        "name": "Name  required!",
-        "last-name": "Last name required!",
-        "email": "E-mail required!",
-        "password": "Password required!"
+        "name": "Name  required",
+        "last-name": "Last name required",
+        "email": "E-mail required",
+        "password": "Password required"
       },
       "invalid": {
-        "name": "Invalid name!",
-        "last-name": "Invalid last name!",
-        "email": "Enter a valid e-mail!",
+        "name": "Invalid name",
+        "last-name": "Invalid last name",
+        "email": "Enter a valid e-mail",
         "password": "Password must be between 8 and 12 characters"
       }
     },

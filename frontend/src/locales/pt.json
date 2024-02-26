@@ -27,15 +27,15 @@
     "last-name": "Sobrenome",
     "validation": {
       "missing": {
-        "name": "Digite seu nome!",
-        "last-name": "Digite seu sobrenome!",
-        "email": "Digite seu e-mail!",
-        "password": "Digite sua senha!"
+        "name": "Digite seu nome",
+        "last-name": "Digite seu sobrenome",
+        "email": "Digite seu e-mail",
+        "password": "Digite sua senha"
       },
       "invalid": {
-        "name": "Nome inválido!",
-        "last-name": "Sobrenome inválido!",
-        "email": "Digite um e-mail inválido!",
+        "name": "Nome inválido",
+        "last-name": "Sobrenome inválido",
+        "email": "Digite um e-mail inválido",
         "password": "Senha precisa ter entre 8 e 12 caracteres"
       }
     },
