@@ -129,6 +129,7 @@ export const SignUpUserPage = () => {
               type="submit"
               colorScheme="blue"
               variant="solid"
+              isDisabled={!(props.isValid && props.dirty)}
               isLoading={loading}
             >
               {t("authentication.signup")}
