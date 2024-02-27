@@ -5,7 +5,7 @@
       "verify-network-connection": "Please check your internet connection"
     },
     "success": {
-      "signup": "You have successfully sign up",
+      "signup": "You have successfully signed up",
       "authentication": "You have successfully authenticated"
     },
     "error": {
@@ -47,9 +47,13 @@
     }
   },
   "nav": {
-    "home": "Home",
+    "app-name": "Restaurant Of The Day",
     "signout": "Sign out",
     "login": "Login",
-    "signup": "Sign Up"
+    "signup": "Sign Up",
+    "aria-label": {
+      "menu": "Open Menu"
+    },
+    "menu": "Menu"
   }
 }

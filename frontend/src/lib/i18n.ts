@@ -7,7 +7,7 @@ import ptTranslations from "../locales/pt.json";
 
 i18next.use(initReactI18next).init({
   debug: true,
-  fallbackLng: "pt",
+  fallbackLng: "en",
   resources: {
     en: {
       translation: enTranslations,
@@ -16,5 +16,5 @@ i18next.use(initReactI18next).init({
       translation: ptTranslations,
     },
   },
-  lng: "pt",
+  lng: "en",
 });

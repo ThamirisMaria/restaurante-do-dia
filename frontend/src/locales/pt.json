@@ -35,21 +35,25 @@
       "invalid": {
         "name": "Nome inválido",
         "last-name": "Sobrenome inválido",
-        "email": "Digite um e-mail inválido",
+        "email": "Digite um e-mail válido",
         "password": "Senha precisa ter entre 8 e 12 caracteres"
       }
     },
     "placeholder": {
       "name": "João",
       "last-name": "da Silva",
-      "email": "joaodasilva@exemplo.ocm",
+      "email": "joaodasilva@exemplo.com",
       "password": "********"
     }
   },
   "nav": {
-    "home": "Início",
+    "app-name": "Restaurante Do Dia",
     "signout": "Sair",
     "login": "Entrar",
-    "signup": "Cadastrar"
+    "signup": "Cadastrar",
+    "aria-label": {
+      "menu": "Abrir Menu"
+    },
+    "menu": "Menu"
   }
 }

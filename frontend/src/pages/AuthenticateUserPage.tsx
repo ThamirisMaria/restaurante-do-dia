@@ -111,7 +111,7 @@ export function AuthenticateUserPage() {
         </Form.Group>
         <Form.Group>
           <Button
-            colorScheme="blue"
+            colorScheme="green"
             variant="solid"
             isLoading={loading}
             type="submit"

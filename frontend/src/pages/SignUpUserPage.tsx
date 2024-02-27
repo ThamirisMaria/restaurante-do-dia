@@ -127,7 +127,7 @@ export const SignUpUserPage = () => {
               h={{ base: "48px", md: "50px" }}
               w={{ base: "140px", sm: "180px", md: "190px" }}
               type="submit"
-              colorScheme="blue"
+              colorScheme="green"
               variant="solid"
               isDisabled={!(props.isValid && props.dirty)}
               isLoading={loading}
