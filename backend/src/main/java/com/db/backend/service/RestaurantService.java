@@ -48,4 +48,40 @@ public class RestaurantService {
     return savedRestaurant.getId();
   }
 
+  public List<RestaurantDTO> getAllRestaurants() {
+    return restaurantRepository.findAll().stream()
+        .map(this::mapToDTO)
+        .collect(Collectors.toList());
+  }
+
+  public List<RestaurantDTO> getRestaurantsByWinnerBlock(boolean winnerBlock) {
+    return restaurantRepository.findByWinnerBlock(winnerBlock).stream()
+        .map(this::mapToDTO)
+        .collect(Collectors.toList());
+  }
+
+  public RestaurantDTO getRestaurantById(Long id) {
+    Restaurant restaurant = restaurantRepository.findById(id)
+        .orElseThrow(() -> new ResourceNotFoundException("Restaurant not found with id: " + id));
+    return mapToDTO(restaurant);
+  }
+
+  private RestaurantDTO mapToDTO(Restaurant restaurant) {
+    return new RestaurantDTO(
+        restaurant.getName(),
+        restaurant.getDescription(),
+        restaurant.getWebsite(),
+        restaurant.getImage(),
+        mapAddressToDTO(restaurant.getAddress()));
+  }
+
+  private AddressDTO mapAddressToDTO(Address address) {
+    return new AddressDTO(
+        address.getNumber(),
+        address.getPostCode(),
+        address.getNeighborhood(),
+        address.getStreet(),
+        address.getCity(),
+        address.getState());
+  }
 }
