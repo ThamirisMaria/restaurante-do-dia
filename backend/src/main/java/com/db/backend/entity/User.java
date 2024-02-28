@@ -7,6 +7,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.db.backend.validation.constraints.FullName;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -32,14 +34,21 @@ public class User implements UserDetails {
     private Long id;
 
     @Column
-    @Email(message = "Email is mandatory")
+    @NotBlank(message = "Name is mandatory")
+    @FullName
+    private String name;
+
+    @Column
+    @NotBlank(message = "Email is mandatory")
+    @Email(message = "User must provide a valid e-mail")
     private String email;
 
     @Column
     @NotBlank(message = "Password is mandatory")
     private String password;
 
-    public User(String email, String password) {
+    public User(String name, String email, String password) {
+        this.name = name;
         this.email = email;
         this.password = password;
     }

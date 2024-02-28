@@ -1,10 +1,10 @@
 package com.db.backend.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,22 +15,32 @@ import com.db.backend.dto.UserRegistrationRequestDTO;
 import com.db.backend.dto.UserRegistrationResponseDTO;
 import com.db.backend.entity.User;
 import com.db.backend.infra.security.JwtService;
-import com.db.backend.repository.UserRepository;
+import com.db.backend.service.UserService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("auth")
+@Tag(name = "Authentication")
 public class AuthenticationController {
     @Autowired
     private AuthenticationManager authenticationManager;
 
     @Autowired
-    private UserRepository repository;
+    private UserService userService;
 
     @Autowired
     private JwtService jwtService;
 
+    @Operation(summary = "Login user", method = "POST")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "User successfully authenticated"),
+            @ApiResponse(responseCode = "401", description = "Authentication failed due to invalid credentials")
+    })
     @PostMapping("/login")
     public ResponseEntity<UserRegistrationResponseDTO> login(@RequestBody @Valid UserAuthenticationRequestDTO data) {
         var usernamePassword = new UsernamePasswordAuthenticationToken(data.email(), data.password());
@@ -39,14 +49,18 @@ public class AuthenticationController {
         return ResponseEntity.ok(new UserRegistrationResponseDTO(token));
     }
 
+    @Operation(summary = "Register user", method = "POST")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "User created successfully"),
+            @ApiResponse(responseCode = "400", description = "Registration failed due to invalid credentials"),
+            @ApiResponse(responseCode = "409", description = "E-mail already in use")
+    })
     @PostMapping("/register")
-    public ResponseEntity<ResponseEntity.BodyBuilder> register(@RequestBody @Valid UserRegistrationRequestDTO data) {
-        if (this.repository.findByEmail(data.email()) != null) {
-            return ResponseEntity.badRequest().build();
+    public ResponseEntity<String> register(@RequestBody @Valid UserRegistrationRequestDTO data) {
+        if (this.userService.existsByEmail(data.email())) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("E-mail already in use");
         }
-        String encryptedPassword = new BCryptPasswordEncoder().encode(data.password());
-        User newUser = new User(data.email(), encryptedPassword);
-        this.repository.save(newUser);
-        return ResponseEntity.ok().build();
+        this.userService.registerNewUser(data);
+        return ResponseEntity.status(HttpStatus.CREATED).body("User created successfully");
     }
 }
