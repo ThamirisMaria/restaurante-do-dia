@@ -39,7 +39,14 @@ public class RestaurantController {
     }
 
     @GetMapping()
-    public String listRestaurant() {
-        return "List of restaurants";
+    public ResponseEntity<List<RestaurantDTO>> getRestaurantsByFilter(
+            @RequestParam(value = "blocked", required = false) Boolean blocked) {
+        if (blocked == null) {
+            List<RestaurantDTO> restaurantDTOs = restaurantService.getAllRestaurants();
+            return ResponseEntity.ok(restaurantDTOs);
+        }
+
+        List<RestaurantDTO> restaurantDTOs = restaurantService.getRestaurantsByWinnerBlock(blocked);
+        return ResponseEntity.ok(restaurantDTOs);
     }
 }
