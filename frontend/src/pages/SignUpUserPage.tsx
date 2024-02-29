@@ -21,7 +21,7 @@ export const SignUpUserPage = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const [event, setEvent] = useState<FormEvent<HTMLDivElement>>();
-  const validation = useValidation(t);
+  const validation = useValidation(t, "signup");
 
   const handleFormSubmit = async (
     { name, lastname, email, password }: Values,

@@ -7,10 +7,11 @@ import {
 import { useField } from "formik";
 
 interface TextFieldProps {
-  label: string;
+  label?: string;
   name: string;
   type?: string;
   placeholder: string;
+  width?: {};
 }
 
 const TextField = ({ label, ...props }: TextFieldProps) => {

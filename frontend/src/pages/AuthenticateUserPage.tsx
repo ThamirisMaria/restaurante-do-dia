@@ -73,7 +73,7 @@ export function AuthenticateUserPage() {
       });
       setTimeout(function () {
         updateAccessToken(response.token);
-        navigate("/", { replace: true });
+        navigate("/voting", { replace: true });
       }, 1500);
     }
   };

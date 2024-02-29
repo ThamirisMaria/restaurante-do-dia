@@ -55,5 +55,31 @@
       "menu": "Open Menu"
     },
     "menu": "Menu"
+  },
+  "restaurant": {
+    "add-restaurant": "Add Restaurant",
+    "new-restaurant": "New Restaurant",
+    "cancel": "Cancel",
+    "add": "Add",
+    "field": {
+      "name": "Name",
+      "description": "Description",
+      "website": "Website",
+      "image": "Image",
+      "address": {
+        "number": "Nº",
+        "postCode": "CEP",
+        "neighborhood": "Neighborhood",
+        "street": "Street",
+        "city": "City",
+        "state": "State"
+      },
+      "steps": {
+        "name-description": "Name and Description",
+        "address": "Address",
+        "media": "Media",
+        "toast": "Invalid fields found"
+      }
+    }
   }
 }

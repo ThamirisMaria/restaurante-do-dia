@@ -8,6 +8,7 @@ import { Navigation } from "./components/ui/Navigation";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { SignUpUserPage } from "./pages/SignUpUserPage";
+import { VotingPage } from "./pages/VotingPage";
 
 export function App() {
   const { i18n } = useTranslation();
@@ -24,6 +25,7 @@ export function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<AuthenticateUserPage />} />
         <Route path="/signup" element={<SignUpUserPage />} />
+        <Route path="/voting" element={<VotingPage />} />
       </Routes>
     </Router>
   );

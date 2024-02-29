@@ -55,5 +55,33 @@
       "menu": "Abrir Menu"
     },
     "menu": "Menu"
+  },
+  "restaurant": {
+    "add-restaurant": "Adicionar Restaurante",
+    "new-restaurant": "Novo Restaurante",
+    "cancel": "Cancelar",
+    "add": "Adicionar",
+    "field": {
+      "name": "Nome",
+      "description": "Descrição",
+      "website": "Website",
+      "image": "Imagem",
+      "address": {
+        "number": "Nº",
+        "postCode": "CEP",
+        "neighborhood": "Bairro",
+        "street": "Rua",
+        "city": "Cidade",
+        "state": "UF"
+      }
+    },
+    "steps": {
+      "name-description": "Nome e Descrição",
+      "address": "Endereço",
+      "media": "Mídia",
+      "previous": "Anterior",
+      "next": "Próximo",
+      "toast": "Campos inválidos encontrados"
+    }
   }
 }
