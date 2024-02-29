@@ -34,14 +34,16 @@ import {
   useDisclosure,
   useSteps,
 } from "@chakra-ui/react";
+import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import TextField from "./ui/TextField";
-import { Formik, FormikHelpers, FormikProps } from "formik";
+import { Field, FieldProps, Formik, FormikHelpers, FormikProps } from "formik";
 import { useValidation } from "@/hooks/useValidation";
+import axios from "axios";
 
 interface AddressValues {
-  number: string;
   postCode: string;
+  number: string;
   neighborhood: string;
   street: string;
   city: string;
@@ -55,6 +57,23 @@ interface Values {
   image: string;
   address: AddressValues;
 }
+
+const addressInitialValues: AddressValues = {
+  postCode: "",
+  number: "",
+  neighborhood: "",
+  street: "",
+  city: "",
+  state: "",
+};
+
+const initialValues: Values = {
+  name: "",
+  description: "",
+  website: "",
+  image: "",
+  address: addressInitialValues,
+};
 
 const handleFormSubmit = async (
   { name, description, website, image, address }: Values,
@@ -79,7 +98,10 @@ const handleFormSubmit = async (
 export const AddRestaurantModal = () => {
   const { t } = useTranslation();
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const firstField = useRef(null);
   const validation = useValidation(t, "restaurant");
+  const [address] = useState<AddressValues>(initialValues.address);
+  const [values, setValues] = useState<Values>(initialValues);
 
   const steps = [
     { title: "1º", description: t("restaurant.steps.name-description") },
@@ -91,6 +113,59 @@ export const AddRestaurantModal = () => {
     index: 1,
     count: steps.length,
   });
+
+  const [cep, setCep] = useState("");
+  const [editableAddress, setEditableAddress] = useState(false);
+  useEffect(() => {
+    const fetchAddress = async () => {
+      if (cep.length === 8) {
+        try {
+          const response = await axios.get(
+            `https://viacep.com.br/ws/${cep}/json/`
+          );
+          setValues({
+            ...values,
+            address: {
+              ...address,
+              neighborhood: response.data.bairro,
+              street: response.data.logradouro,
+              city: response.data.localidade,
+              state: response.data.uf,
+            },
+          });
+
+          setEditableAddress(true);
+        } catch (error) {
+          console.error("Erro ao buscar endereço:", error);
+        }
+      }
+    };
+
+    fetchAddress();
+  }, [cep]);
+
+  //   const handleCEPChange = async (cep: string) => {
+  //     if (cep.length === 8) {
+  //       try {
+  //         const response = await axios.get(
+  //           `https://viacep.com.br/ws/${cep}/json/`
+  //         );
+  //         setValues({
+  //           ...values,
+  //           address: {
+  //             ...address,
+  //             neighborhood: response.data.bairro,
+  //             street: response.data.logradouro,
+  //             city: response.data.localidade,
+  //             state: response.data.uf,
+  //           },
+  //         });
+  //         console.log(address);
+  //       } catch (error) {
+  //         console.error("Erro ao buscar endereço:", error);
+  //       }
+  //     }
+  //   };
 
   return (
     <>
@@ -108,6 +183,7 @@ export const AddRestaurantModal = () => {
         isOpen={isOpen}
         placement="left"
         size={{ sm: "sm", lg: "md" }}
+        initialFocusRef={firstField}
         onClose={onClose}
       >
         <DrawerOverlay />
@@ -179,20 +255,7 @@ export const AddRestaurantModal = () => {
               )}
             </Stepper>
             <Formik
-              initialValues={{
-                name: "",
-                description: "",
-                website: "",
-                image: "",
-                address: {
-                  number: "",
-                  postCode: "",
-                  neighborhood: "",
-                  street: "",
-                  city: "",
-                  state: "",
-                },
-              }}
+              initialValues={initialValues}
               validationSchema={validation}
               onSubmit={(values, actions) => {
                 handleFormSubmit(values, actions);
@@ -219,11 +282,13 @@ export const AddRestaurantModal = () => {
                         <TextField
                           label={t("restaurant.field.name") + " *"}
                           name="name"
+                          key="name"
                           placeholder={t("restaurant.field.name")}
                         ></TextField>
                         <TextField
                           label={t("restaurant.field.description") + " *"}
                           name="description"
+                          key="description"
                           placeholder={t("restaurant.field.description")}
                         ></TextField>
                       </>
@@ -235,13 +300,23 @@ export const AddRestaurantModal = () => {
                           display={{ base: "flex", sm: "block" }}
                           width={{ base: "90%", sm: "100%" }}
                         >
-                          <TextField
-                            label={
-                              t("restaurant.field.address.postCode") + " *"
-                            }
-                            name="address.postCode"
-                            placeholder={t("restaurant.field.address.postCode")}
-                          ></TextField>
+                          <Field name="postCode">
+                            {({ field }: FieldProps) => (
+                              <TextField
+                                {...field}
+                                onChange={(e) => {
+                                  field.onChange(e);
+                                  setCep(e.target.value);
+                                }}
+                                label={
+                                  t("restaurant.field.address.postCode") + " *"
+                                }
+                                placeholder={t(
+                                  "restaurant.field.address.postCode"
+                                )}
+                              ></TextField>
+                            )}
+                          </Field>
                         </VStack>
                         <HStack
                           display={{ base: "block", sm: "flex" }}
@@ -253,12 +328,16 @@ export const AddRestaurantModal = () => {
                             }}
                             label={t("restaurant.field.address.street") + " *"}
                             name="address.street"
+                            value={values.address.street}
+                            readOnly={!editableAddress}
                             placeholder={t("restaurant.field.address.street")}
                           ></TextField>
                           <Spacer />
                           <TextField
                             label={t("restaurant.field.address.number") + " *"}
                             name="address.number"
+                            value={values.address.number}
+                            readOnly={!editableAddress}
                             placeholder={t("restaurant.field.address.number")}
                           ></TextField>
                         </HStack>
@@ -271,6 +350,8 @@ export const AddRestaurantModal = () => {
                               t("restaurant.field.address.neighborhood") + " *"
                             }
                             name="address.neighborhood"
+                            value={values.address.neighborhood}
+                            readOnly={!editableAddress}
                             placeholder={t(
                               "restaurant.field.address.neighborhood"
                             )}
@@ -284,12 +365,16 @@ export const AddRestaurantModal = () => {
                             }}
                             label={t("restaurant.field.address.city") + " *"}
                             name="address.city"
+                            value={values.address.city}
+                            readOnly={!editableAddress}
                             placeholder={t("restaurant.field.address.city")}
                           ></TextField>
                           <Spacer />
                           <TextField
                             label={t("restaurant.field.address.state") + " *"}
                             name="address.state"
+                            value={values.address.state}
+                            readOnly={!editableAddress}
                             placeholder={t("restaurant.field.address.state")}
                           ></TextField>
                         </HStack>
