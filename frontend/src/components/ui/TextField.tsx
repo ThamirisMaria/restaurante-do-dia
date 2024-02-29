@@ -28,7 +28,6 @@ const TextField = ({ label, onChange, ...props }: TextFieldProps) => {
         h={{ base: "50px", md: "52px" }}
         {...field}
         {...props}
-        key={props.name}
         onChange={onChange}
       />
       <FormErrorMessage>{meta.error}</FormErrorMessage>

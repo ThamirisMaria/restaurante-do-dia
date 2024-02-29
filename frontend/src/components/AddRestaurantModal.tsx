@@ -115,7 +115,6 @@ export const AddRestaurantModal = () => {
   });
 
   const [cep, setCep] = useState("");
-  const [editableAddress, setEditableAddress] = useState(false);
   useEffect(() => {
     const fetchAddress = async () => {
       if (cep.length === 8) {
@@ -133,8 +132,6 @@ export const AddRestaurantModal = () => {
               state: response.data.uf,
             },
           });
-
-          setEditableAddress(true);
         } catch (error) {
           console.error("Erro ao buscar endereço:", error);
         }
@@ -143,29 +140,6 @@ export const AddRestaurantModal = () => {
 
     fetchAddress();
   }, [cep]);
-
-  //   const handleCEPChange = async (cep: string) => {
-  //     if (cep.length === 8) {
-  //       try {
-  //         const response = await axios.get(
-  //           `https://viacep.com.br/ws/${cep}/json/`
-  //         );
-  //         setValues({
-  //           ...values,
-  //           address: {
-  //             ...address,
-  //             neighborhood: response.data.bairro,
-  //             street: response.data.logradouro,
-  //             city: response.data.localidade,
-  //             state: response.data.uf,
-  //           },
-  //         });
-  //         console.log(address);
-  //       } catch (error) {
-  //         console.error("Erro ao buscar endereço:", error);
-  //       }
-  //     }
-  //   };
 
   return (
     <>
@@ -199,7 +173,7 @@ export const AddRestaurantModal = () => {
               display={{ base: "none", sm: "flex" }}
             >
               {steps.map((step, index) => (
-                <Step key={index}>
+                <Step key={`desktop-${index}`}>
                   <StepIndicator>
                     <StepStatus
                       complete={<StepIcon />}
@@ -223,7 +197,7 @@ export const AddRestaurantModal = () => {
             >
               {steps.map((step, index) =>
                 activeStep === index + 1 ? (
-                  <Step key={index}>
+                  <Step key={`mobile-${index}`}>
                     <StepIndicator>
                       <StepStatus
                         complete={<StepIcon />}
@@ -282,14 +256,26 @@ export const AddRestaurantModal = () => {
                         <TextField
                           label={t("restaurant.field.name") + " *"}
                           name="name"
-                          key="name"
                           placeholder={t("restaurant.field.name")}
+                          value={values.name}
+                          onChange={(e) =>
+                            setValues({
+                              ...values,
+                              name: e.target.value,
+                            })
+                          }
                         ></TextField>
                         <TextField
                           label={t("restaurant.field.description") + " *"}
                           name="description"
-                          key="description"
                           placeholder={t("restaurant.field.description")}
+                          value={values.description}
+                          onChange={(e) =>
+                            setValues({
+                              ...values,
+                              description: e.target.value,
+                            })
+                          }
                         ></TextField>
                       </>
                     )}
@@ -329,7 +315,15 @@ export const AddRestaurantModal = () => {
                             label={t("restaurant.field.address.street") + " *"}
                             name="address.street"
                             value={values.address.street}
-                            readOnly={!editableAddress}
+                            onChange={(e) =>
+                              setValues({
+                                ...values,
+                                address: {
+                                  ...values.address,
+                                  street: e.target.value,
+                                },
+                              })
+                            }
                             placeholder={t("restaurant.field.address.street")}
                           ></TextField>
                           <Spacer />
@@ -337,7 +331,15 @@ export const AddRestaurantModal = () => {
                             label={t("restaurant.field.address.number") + " *"}
                             name="address.number"
                             value={values.address.number}
-                            readOnly={!editableAddress}
+                            onChange={(e) =>
+                              setValues({
+                                ...values,
+                                address: {
+                                  ...values.address,
+                                  number: e.target.value,
+                                },
+                              })
+                            }
                             placeholder={t("restaurant.field.address.number")}
                           ></TextField>
                         </HStack>
@@ -351,7 +353,15 @@ export const AddRestaurantModal = () => {
                             }
                             name="address.neighborhood"
                             value={values.address.neighborhood}
-                            readOnly={!editableAddress}
+                            onChange={(e) =>
+                              setValues({
+                                ...values,
+                                address: {
+                                  ...values.address,
+                                  neighborhood: e.target.value,
+                                },
+                              })
+                            }
                             placeholder={t(
                               "restaurant.field.address.neighborhood"
                             )}
@@ -366,7 +376,15 @@ export const AddRestaurantModal = () => {
                             label={t("restaurant.field.address.city") + " *"}
                             name="address.city"
                             value={values.address.city}
-                            readOnly={!editableAddress}
+                            onChange={(e) =>
+                              setValues({
+                                ...values,
+                                address: {
+                                  ...values.address,
+                                  city: e.target.value,
+                                },
+                              })
+                            }
                             placeholder={t("restaurant.field.address.city")}
                           ></TextField>
                           <Spacer />
@@ -374,7 +392,15 @@ export const AddRestaurantModal = () => {
                             label={t("restaurant.field.address.state") + " *"}
                             name="address.state"
                             value={values.address.state}
-                            readOnly={!editableAddress}
+                            onChange={(e) =>
+                              setValues({
+                                ...values,
+                                address: {
+                                  ...values.address,
+                                  state: e.target.value,
+                                },
+                              })
+                            }
                             placeholder={t("restaurant.field.address.state")}
                           ></TextField>
                         </HStack>
@@ -388,6 +414,13 @@ export const AddRestaurantModal = () => {
                           label={t("restaurant.field.website")}
                           name="website"
                           placeholder={t("restaurant.field.website")}
+                          value={values.website}
+                          onChange={(e) =>
+                            setValues({
+                              ...values,
+                              website: e.target.value,
+                            })
+                          }
                         ></TextField>
 
                         <TextField
@@ -395,6 +428,13 @@ export const AddRestaurantModal = () => {
                           label={t("restaurant.field.image")}
                           name="image"
                           placeholder={t("restaurant.field.image")}
+                          value={values.image}
+                          onChange={(e) =>
+                            setValues({
+                              ...values,
+                              image: e.target.value,
+                            })
+                          }
                         ></TextField>
                       </>
                     )}
