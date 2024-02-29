@@ -81,5 +81,8 @@
         "toast": "Invalid fields found"
       }
     }
+  },
+  "error": {
+    "unauthorized": "Error - Unauthorized"
   }
 }

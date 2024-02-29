@@ -83,5 +83,8 @@
       "next": "Próximo",
       "toast": "Campos inválidos encontrados"
     }
+  },
+  "error": {
+    "unauthorized": "Erro - Não Autorizado"
   }
 }
