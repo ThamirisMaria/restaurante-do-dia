@@ -31,19 +31,23 @@ public class RestaurantConverter implements EntityDTOConverter<Restaurant, Resta
 
   @Override
   public Restaurant convertToEntity(RestaurantDTO restaurantDTO) {
-    Restaurant existingRestaurant = restaurantRepository.findByAddressNumberAndAddressPostCode(
-        restaurantDTO.address().number(),
-        restaurantDTO.address().postCode());
+    Restaurant existingRestaurant = getExistingRestaurant(restaurantDTO);
 
-    if (existingRestaurant != null) {
-      return existingRestaurant;
+    if (existingRestaurant == null) {
+      return new Restaurant(
+          restaurantDTO.name(),
+          restaurantDTO.description(),
+          restaurantDTO.website(),
+          restaurantDTO.image(),
+          addressConverter.convertToEntity(restaurantDTO.address()));
     }
 
-    return new Restaurant(
-        restaurantDTO.name(),
-        restaurantDTO.description(),
-        restaurantDTO.website(),
-        restaurantDTO.image(),
-        addressConverter.convertToEntity(restaurantDTO.address()));
+    return existingRestaurant;
+  }
+
+  public Restaurant getExistingRestaurant(RestaurantDTO restaurantDTO) {
+    return restaurantRepository.findByAddressNumberAndAddressPostCode(
+        restaurantDTO.address().number(),
+        restaurantDTO.address().postCode());
   }
 }

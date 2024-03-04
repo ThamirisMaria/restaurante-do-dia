@@ -61,7 +61,7 @@ public class VotingService {
   private Voting closeVotingIfNecessary(Voting voting) {
     LocalDateTime votingStart = LocalDate.now().atStartOfDay();
     LocalDateTime currentDate = LocalDateTime.now();
-    LocalDateTime votingEnd = LocalDate.now().atTime(11, 0);
+    LocalDateTime votingEnd = LocalDate.now().atTime(22, 0); // alterar de volta para 11
 
     if (currentDate.isBefore(votingStart) || currentDate.isAfter(votingEnd)) {
       if (!voting.getClosed()) {

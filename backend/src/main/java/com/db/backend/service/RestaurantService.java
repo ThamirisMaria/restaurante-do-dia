@@ -35,7 +35,7 @@ public class RestaurantService {
   @Autowired
   private AddressConverter addressConverter;
 
-  public Long registerNewRestaurant(RestaurantDTO restaurantDTO) {
+  public RestaurantDTO registerNewRestaurant(RestaurantDTO restaurantDTO) {
     Address address = addressConverter.convertToEntity(restaurantDTO.address());
 
     Address savedAddress = addressRepository.save(address);
@@ -46,7 +46,7 @@ public class RestaurantService {
     savedAddress.setRestaurant(restaurant);
 
     Restaurant savedRestaurant = restaurantRepository.save(restaurant);
-    return savedRestaurant.getId();
+    return restaurantConverter.convertToDTO(savedRestaurant);
   }
 
   public Page<RestaurantDTO> getAllRestaurants(Pageable pageable) {

@@ -28,14 +28,20 @@ public class VoteService {
 
   @Autowired
   private RestaurantConverter restaurantConverter;
+  @Autowired
+  private RestaurantService restaurantService;
 
   @Autowired
   private VotingService votingService;
 
-  public Vote registerVote(UserDTO userDTO, RestaurantDTO restaurantDTO) {
+  public Vote registerVote(User user, RestaurantDTO restaurantDTO) {
     Voting currentVoting = votingService.getCurrentVoting();
-    Restaurant restaurantToVote = restaurantConverter.convertToEntity(restaurantDTO);
-    User voter = userConverter.convertToEntity(userDTO);
+
+    Restaurant restaurantToVote = restaurantConverter.getExistingRestaurant(restaurantDTO);
+    if (restaurantToVote == null) {
+      restaurantDTO = restaurantService.registerNewRestaurant(restaurantDTO);
+      restaurantToVote = restaurantConverter.convertToEntity(restaurantDTO);
+    }
 
     if (currentVoting.getClosed()) {
       throw new InvalidVoteException("Voting session is closed for today");
@@ -45,9 +51,7 @@ public class VoteService {
       throw new InvalidVoteException("This restaurant is not available for votes untill the end of this week");
     }
 
-    Optional<Vote> existingVote = currentVoting.getVotes().stream()
-        .filter(vote -> vote.getUser().getEmail().equals(voter.getEmail()))
-        .findFirst();
+    Optional<Vote> existingVote = getExistingVote(currentVoting, user);
 
     if (existingVote.isPresent()) {
       Vote vote = existingVote.get();
@@ -61,10 +65,16 @@ public class VoteService {
     } else {
 
       Vote newVote = new Vote(
-          voter,
+          user,
           restaurantToVote,
           currentVoting);
       return voteRepository.save(newVote);
     }
+  }
+
+  private Optional<Vote> getExistingVote(Voting currentVoting, User user) {
+    return currentVoting.getVotes().stream()
+        .filter(vote -> vote.getUser().getEmail().equals(user.getEmail()))
+        .findFirst();
   }
 }
