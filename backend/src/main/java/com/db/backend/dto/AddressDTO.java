@@ -1,5 +1,8 @@
 package com.db.backend.dto;
 
-public record AddressDTO(String number, String postCode, String neighborhood, String street, String city,
-    String state) {
+import io.micrometer.common.lang.NonNull;
+
+public record AddressDTO(@NonNull String number, @NonNull String postCode, @NonNull String neighborhood,
+        @NonNull String street, @NonNull String city,
+        @NonNull String state) {
 }
