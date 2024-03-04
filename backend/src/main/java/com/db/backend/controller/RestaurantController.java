@@ -1,8 +1,8 @@
 package com.db.backend.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,9 +27,9 @@ public class RestaurantController {
     private RestaurantService restaurantService;
 
     @PostMapping()
-    public ResponseEntity<Long> registerRestaurant(@RequestBody @Valid RestaurantDTO restaurantDTO) {
-        Long restaurantId = restaurantService.registerNewRestaurant(restaurantDTO);
-        return ResponseEntity.status(HttpStatus.CREATED).body(restaurantId);
+    public ResponseEntity<RestaurantDTO> registerRestaurant(@RequestBody @Valid RestaurantDTO restaurantDTO) {
+        RestaurantDTO savedRestaurantDTO = restaurantService.registerNewRestaurant(restaurantDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedRestaurantDTO);
     }
 
     @GetMapping("/{id}")
@@ -39,14 +39,16 @@ public class RestaurantController {
     }
 
     @GetMapping()
-    public ResponseEntity<List<RestaurantDTO>> getRestaurantsByFilter(
-            @RequestParam(value = "blocked", required = false) Boolean blocked) {
+    public ResponseEntity<Page<RestaurantDTO>> getRestaurantsByBlocked(
+            @RequestParam(value = "blocked", required = false) Boolean blocked,
+            Pageable pageable) {
         if (blocked == null) {
-            List<RestaurantDTO> restaurantDTOs = restaurantService.getAllRestaurants();
+            Page<RestaurantDTO> restaurantDTOs = restaurantService.getAllRestaurants(pageable);
             return ResponseEntity.ok(restaurantDTOs);
         }
 
-        List<RestaurantDTO> restaurantDTOs = restaurantService.getRestaurantsByWinnerBlock(blocked);
+        Page<RestaurantDTO> restaurantDTOs = restaurantService.getRestaurantsByWinnerBlockSortedByVotes(blocked,
+                pageable);
         return ResponseEntity.ok(restaurantDTOs);
     }
 }

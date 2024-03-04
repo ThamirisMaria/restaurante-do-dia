@@ -33,7 +33,7 @@ public class Address {
 
   @Column(nullable = false)
   @NotBlank(message = "Postal Code is mandatory")
-  @Size(min = 9, message = "User must provide a valid postal code")
+  @Size(min = 8, message = "User must provide a valid postal code")
   private String postCode;
 
   @Column(nullable = false)
