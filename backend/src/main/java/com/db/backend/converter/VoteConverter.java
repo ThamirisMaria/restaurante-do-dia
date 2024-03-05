@@ -13,20 +13,15 @@ public class VoteConverter implements EntityDTOConverter<Vote, VoteRequestDTO> {
   private UserConverter userConverter;
   @Autowired
   private RestaurantConverter restaurantConverter;
-  @Autowired
-  private VotingConverter votingConverter;
 
   @Override
   public VoteRequestDTO convertToDTO(Vote vote) {
     return new VoteRequestDTO(userConverter.convertToDTO(vote.getUser()),
-        restaurantConverter.convertToDTO(vote.getRestaurant()), votingConverter.convertToDTO(vote.getVoting()));
+        restaurantConverter.convertToDTO(vote.getRestaurant()));
   }
 
   @Override
-  public Vote convertToEntity(VoteRequestDTO voteRequestDTO) {
-    return new Vote(userConverter.convertToEntity(voteRequestDTO.userDTO()),
-        restaurantConverter.convertToEntity(voteRequestDTO.restaurantDTO()),
-        votingConverter.convertToEntity(voteRequestDTO.votingDTO()));
+  public Vote convertToEntity(VoteRequestDTO dto) {
+    throw new UnsupportedOperationException("Unimplemented method 'convertToEntity'");
   }
-
 }

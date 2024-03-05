@@ -8,6 +8,7 @@ import java.util.List;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -23,9 +24,10 @@ import lombok.Setter;
 public class Voting {
   @Id
   @GeneratedValue(strategy = GenerationType.SEQUENCE)
+  @Getter
   private Long id;
 
-  @OneToMany(mappedBy = "voting", cascade = CascadeType.ALL, orphanRemoval = true)
+  @OneToMany(mappedBy = "voting", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
   @Getter
   @Setter
   private List<Vote> votes = new ArrayList<>();

@@ -61,7 +61,7 @@ public class Restaurant {
   @OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL, orphanRemoval = true)
   private List<Vote> votes = new ArrayList<>();
 
-  @OneToMany(mappedBy = "winningRestaurant")
+  @OneToMany(mappedBy = "winningRestaurant", cascade = CascadeType.ALL)
   private List<Voting> wonVotings = new ArrayList<>();
 
   @Column

@@ -34,7 +34,7 @@ public class VoteService {
   private VotingService votingService;
 
   public Vote registerVote(User user, RestaurantDTO restaurantDTO) {
-    Voting currentVoting = votingService.getCurrentVoting();
+    Voting currentVoting = votingService.getCurrentVotingEntity();
 
     Restaurant restaurantToVote = restaurantConverter.getExistingRestaurant(restaurantDTO);
     if (restaurantToVote == null) {
