@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.db.backend.converter.VotingConverter;
 import com.db.backend.dto.VotingDTO;
+import com.db.backend.entity.Restaurant;
 import com.db.backend.entity.Vote;
 import com.db.backend.entity.Voting;
 import com.db.backend.infra.exception.DuplicateVotingException;
@@ -66,7 +67,7 @@ public class VotingService {
     if (currentDate.isBefore(votingStart) || currentDate.isAfter(votingEnd)) {
       if (!voting.getClosed()) {
         voting.setClosed(true);
-        if (!(voting.getWinningRestaurant() == null)) {
+        if (voting.getWinningRestaurant() != null) {
           voting.getWinningRestaurant().setWinnerBlock(true);
           voting.getWinningRestaurant().setWinWeek(LocalDate.now().get(WeekFields.ISO.weekOfWeekBasedYear()));
         }
@@ -81,9 +82,32 @@ public class VotingService {
 
     currentVoting.getVotes().add(vote);
 
-    currentVoting = votingRepository.save(currentVoting);
+    currentVoting = updateWinnerRestaurant(currentVoting, vote);
+
+    if (currentVoting != null) {
+      currentVoting = votingRepository.save(currentVoting);
+    }
 
     return votingConverter.convertToDTO(currentVoting);
+  }
+
+  public Voting updateWinnerRestaurant(Voting voting, Vote vote) {
+    Restaurant currentWinnerRestaurant = voting.getWinningRestaurant();
+    Restaurant votedRestaurant = vote.getRestaurant();
+
+    if (currentWinnerRestaurant == null) {
+      voting.setWinningRestaurant(votedRestaurant);
+      return voting;
+    }
+
+    int numberOfVotesCurrentWinnerRestaurant = currentWinnerRestaurant.getVotes().size();
+    int numberOfVotesVotedRestaurant = votedRestaurant.getVotes().size();
+
+    if (numberOfVotesVotedRestaurant > numberOfVotesCurrentWinnerRestaurant) {
+      voting.setWinningRestaurant(votedRestaurant);
+    }
+
+    return voting;
   }
 
   public List<VotingDTO> getAllVotings() {
