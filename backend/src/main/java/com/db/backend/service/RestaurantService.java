@@ -35,7 +35,7 @@ public class RestaurantService {
   @Autowired
   private AddressConverter addressConverter;
 
-  public RestaurantDTO registerNewRestaurant(RestaurantDTO restaurantDTO) {
+  public RestaurantDTO registerRestaurant(RestaurantDTO restaurantDTO) {
     Address address = addressConverter.convertToEntity(restaurantDTO.address());
 
     Address savedAddress = addressRepository.save(address);

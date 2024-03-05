@@ -6,15 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.db.backend.converter.RestaurantConverter;
-import com.db.backend.converter.UserConverter;
 import com.db.backend.dto.RestaurantDTO;
-import com.db.backend.dto.UserDTO;
 import com.db.backend.entity.Restaurant;
 import com.db.backend.entity.User;
 import com.db.backend.entity.Vote;
 import com.db.backend.entity.Voting;
 import com.db.backend.infra.exception.DuplicateVoteException;
 import com.db.backend.infra.exception.InvalidVoteException;
+import com.db.backend.repository.UserRepository;
 import com.db.backend.repository.VoteRepository;
 
 @Service
@@ -24,7 +23,7 @@ public class VoteService {
   private VoteRepository voteRepository;
 
   @Autowired
-  private UserConverter userConverter;
+  private UserRepository userRepository;
 
   @Autowired
   private RestaurantConverter restaurantConverter;
@@ -39,7 +38,7 @@ public class VoteService {
 
     Restaurant restaurantToVote = restaurantConverter.getExistingRestaurant(restaurantDTO);
     if (restaurantToVote == null) {
-      restaurantDTO = restaurantService.registerNewRestaurant(restaurantDTO);
+      restaurantDTO = restaurantService.registerRestaurant(restaurantDTO);
       restaurantToVote = restaurantConverter.convertToEntity(restaurantDTO);
     }
 
@@ -61,6 +60,12 @@ public class VoteService {
       }
 
       vote.setRestaurant(restaurantToVote);
+
+      restaurantToVote.getVotes().add(vote);
+      restaurantService.registerRestaurant(restaurantDTO);
+      user.getVotes().add(vote);
+      userRepository.save(user);
+
       return voteRepository.save(vote);
     } else {
 

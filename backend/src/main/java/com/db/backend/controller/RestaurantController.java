@@ -28,7 +28,7 @@ public class RestaurantController {
 
     @PostMapping()
     public ResponseEntity<RestaurantDTO> registerRestaurant(@RequestBody @Valid RestaurantDTO restaurantDTO) {
-        RestaurantDTO savedRestaurantDTO = restaurantService.registerNewRestaurant(restaurantDTO);
+        RestaurantDTO savedRestaurantDTO = restaurantService.registerRestaurant(restaurantDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedRestaurantDTO);
     }
 
