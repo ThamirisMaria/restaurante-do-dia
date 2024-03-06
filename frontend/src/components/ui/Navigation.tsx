@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import { useTranslation } from "react-i18next";
 import {
@@ -24,6 +24,7 @@ import { HamburgerIcon } from "@chakra-ui/icons";
 export function Navigation() {
   const { t } = useTranslation();
   const { accessToken, updateAccessToken } = useAuth();
+  const navegate = useNavigate();
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -31,11 +32,23 @@ export function Navigation() {
 
   const logout = () => {
     onClose();
+    navegate("/");
     updateAccessToken(null);
   };
 
   return (
-    <Flex as="nav" alignItems="center">
+    <Flex
+      as="nav"
+      alignItems="center"
+      textAlign="center"
+      position="fixed"
+      right={0}
+      top={0}
+      width="100%"
+      zIndex="100"
+      height="10vh"
+      bgColor="white"
+    >
       <Tooltip
         label={t("home-page")}
         bgColor={bgColor}

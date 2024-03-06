@@ -73,13 +73,13 @@ export function AuthenticateUserPage() {
       });
       setTimeout(function () {
         updateAccessToken(response.token);
-        navigate("/", { replace: true });
+        navigate("/voting", { replace: true });
       }, 1500);
     }
   };
 
   return (
-    <VStack>
+    <VStack paddingTop="10vh" paddingBottom="8vh">
       <Heading as="h1">{t("authentication.login")}</Heading>
       {message && <Message {...message} />}
       <Form

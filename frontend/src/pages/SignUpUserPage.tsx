@@ -21,7 +21,7 @@ export const SignUpUserPage = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const [event, setEvent] = useState<FormEvent<HTMLDivElement>>();
-  const validation = useValidation(t);
+  const validation = useValidation(t, "signup");
 
   const handleFormSubmit = async (
     { name, lastname, email, password }: Values,
@@ -84,7 +84,7 @@ export const SignUpUserPage = () => {
       }}
     >
       {(props: FormikProps<Values>) => (
-        <VStack>
+        <VStack paddingTop="10vh" paddingBottom="8vh">
           <Heading fontSize={{ base: "30px", sm: "40px", md: "45px" }} as="h1">
             {t("authentication.signup")}
           </Heading>

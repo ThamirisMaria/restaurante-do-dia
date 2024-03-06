@@ -55,5 +55,55 @@
       "menu": "Abrir Menu"
     },
     "menu": "Menu"
-  }
+  },
+  "restaurant": {
+    "add-restaurant": "Adicionar Restaurante",
+    "new-restaurant": "Novo Restaurante",
+    "cancel": "Cancelar",
+    "add": "Adicionar",
+    "field": {
+      "name": "Nome",
+      "description": "Descrição",
+      "website": "Website",
+      "image": "Imagem",
+      "address": {
+        "number": "Nº",
+        "postCode": "CEP",
+        "neighborhood": "Bairro",
+        "street": "Rua",
+        "city": "Cidade",
+        "state": "UF"
+      }
+    },
+    "validation": {
+      "name": "Digite o nome"
+    },
+    "steps": {
+      "name-description": "Nome e Descrição",
+      "address": "Endereço",
+      "media": "Mídia",
+      "previous": "Anterior",
+      "next": "Próximo",
+      "toast": "Campos inválidos encontrados"
+    }
+  },
+  "error": {
+    "unauthorized": "Erro - Não Autorizado",
+    "unexpected": "Um erro inesperado ocorreu, tente recarregar a página!"
+  },
+  "voting": {
+    "closed": "Votação Fechada!",
+    "result": {
+      "restaurant": "Veja o restaurante do dia",
+      "votes": "votos de"
+    },
+    "history": "Histórico da votação",
+    "no_votes": "Nenhum restaurante foi votado hoje, volte amanhã para uma nova votação",
+    "vote": "Votar",
+    "view_result": "Visualizar resultado",
+    "first-to-vote": "Seja a primeira pessoa a votar",
+    "in-progress": "Votação em andamento",
+    "most-voted-restaurant": "Restaurante mais votado"
+  },
+  "voted_for": "votou em"
 }

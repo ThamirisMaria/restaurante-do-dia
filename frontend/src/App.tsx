@@ -8,6 +8,10 @@ import { Navigation } from "./components/ui/Navigation";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { SignUpUserPage } from "./pages/SignUpUserPage";
+import { VotingPage } from "./pages/VotingPage";
+import { useAuth } from "./hooks/useAuth";
+import { ErrorUnauthorized } from "./components/error/ErrorUnauthorized";
+import Footer from "./components/ui/Footer";
 
 export function App() {
   const { i18n } = useTranslation();
@@ -17,6 +21,8 @@ export function App() {
     i18n.changeLanguage(lng);
   }, [lng]);
 
+  const { accessToken } = useAuth();
+
   return (
     <Router>
       <Navigation />
@@ -24,7 +30,13 @@ export function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<AuthenticateUserPage />} />
         <Route path="/signup" element={<SignUpUserPage />} />
+        <Route
+          path="/voting"
+          element={accessToken ? <VotingPage /> : <ErrorUnauthorized />}
+        />
+        <Route path="/errorUnauthorized" element={<ErrorUnauthorized />} />
       </Routes>
+      <Footer />
     </Router>
   );
 }

@@ -8,10 +8,7 @@ import com.db.backend.dto.UserRegistrationRequestDTO;
 import com.db.backend.entity.User;
 import com.db.backend.repository.UserRepository;
 
-import lombok.RequiredArgsConstructor;
-
 @Service
-@RequiredArgsConstructor
 public class UserService {
 
   @Autowired
