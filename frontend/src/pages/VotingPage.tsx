@@ -28,7 +28,7 @@ import { ExternalLinkIcon } from "@chakra-ui/icons";
 import { Link } from "react-router-dom";
 import {
   Restaurant,
-  listRestaurantRequest,
+  listAvailableRestaurantsRequest,
 } from "@/lib/requests/listRestaurantsRequest";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -75,7 +75,7 @@ export const VotingPage = () => {
   }, []);
 
   useEffect(() => {
-    listRestaurantRequest(page).then((data) => {
+    listAvailableRestaurantsRequest(page).then((data) => {
       const [error, response] = data;
       if (response) {
         console.log(response);

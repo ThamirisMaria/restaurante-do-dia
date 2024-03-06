@@ -16,6 +16,9 @@ import {
   DrawerFooter,
   DrawerHeader,
   DrawerOverlay,
+  FormControl,
+  FormErrorMessage,
+  FormLabel,
   Heading,
   Spacer,
   Step,
@@ -170,16 +173,45 @@ const RegisterRestaurantModal = () => {
                 </Heading>
                 {activeStep === 1 && (
                   <>
-                    <Field
-                      name="name"
-                      component={RestaurantTextField}
-                      label={t("restaurant.field.name") + " *"}
-                    />
-                    <Field
-                      name="description"
-                      component={RestaurantTextField}
-                      label={t("restaurant.field.description") + " *"}
-                    />
+                    <FormControl
+                      isInvalid={
+                        (props.getFieldMeta("name").error &&
+                          props.getFieldMeta("name").touched) ||
+                        false
+                      }
+                    >
+                      <FormLabel fontSize={{ base: "18x", md: "20px" }}>
+                        {t("restaurant.field.name")}
+                      </FormLabel>
+                      <Field
+                        name="name"
+                        component={RestaurantTextField}
+                        label={t("restaurant.field.name") + " *"}
+                      />
+                      <FormErrorMessage>
+                        {props.getFieldMeta("name").error}
+                      </FormErrorMessage>
+                    </FormControl>
+
+                    <FormControl
+                      isInvalid={
+                        (props.getFieldMeta("description").error &&
+                          props.getFieldMeta("description").touched) ||
+                        false
+                      }
+                    >
+                      <FormLabel fontSize={{ base: "18x", md: "20px" }}>
+                        {t("restaurant.field.description")}
+                      </FormLabel>
+                      <Field
+                        name="description"
+                        component={RestaurantTextField}
+                        label={t("restaurant.field.description") + " *"}
+                      />
+                      <FormErrorMessage>
+                        {props.getFieldMeta("description").error}
+                      </FormErrorMessage>
+                    </FormControl>
                   </>
                 )}
                 {activeStep === 2 && (
@@ -188,51 +220,171 @@ const RegisterRestaurantModal = () => {
                       display={{ base: "flex", sm: "block" }}
                       width={{ base: "90%", sm: "100%" }}
                     >
-                      <Field
-                        name="address.postCode"
-                        component={RestaurantTextField}
-                        label={t("restaurant.field.address.postCode") + " *"}
-                      />
+                      <FormControl
+                        isInvalid={
+                          (props.getFieldMeta("address.postCode").error &&
+                            props.getFieldMeta("address.postCode").touched) ||
+                          false
+                        }
+                      >
+                        <FormLabel fontSize={{ base: "18x", md: "20px" }}>
+                          {t("restaurant.field.address.postCode")}
+                        </FormLabel>
+                        <Field
+                          name="address.postCode"
+                          component={RestaurantTextField}
+                          label={t("restaurant.field.address.postCode") + " *"}
+                        />
+                        <FormErrorMessage>
+                          {props.getFieldMeta("address.postCode").error}
+                        </FormErrorMessage>
+                      </FormControl>
                     </VStack>
-                    <Field
-                      name="address.street"
-                      component={RestaurantTextField}
-                      label={t("restaurant.field.address.street") + " *"}
-                    />
-                    <Field
-                      name="address.number"
-                      component={RestaurantTextField}
-                      label={t("restaurant.field.address.number") + " *"}
-                    />
-                    <Field
-                      name="address.neighborhood"
-                      component={RestaurantTextField}
-                      label={t("restaurant.field.address.neighborhood") + " *"}
-                    />
-                    <Field
-                      name="address.city"
-                      component={RestaurantTextField}
-                      label={t("restaurant.field.address.city") + " *"}
-                    />
-                    <Field
-                      name="address.state"
-                      component={RestaurantTextField}
-                      label={t("restaurant.field.address.state") + " *"}
-                    />
+
+                    <FormControl
+                      isInvalid={
+                        (props.getFieldMeta("address.street").error &&
+                          props.getFieldMeta("address.street").touched) ||
+                        false
+                      }
+                    >
+                      <FormLabel fontSize={{ base: "18x", md: "20px" }}>
+                        {t("restaurant.field.address.street")}
+                      </FormLabel>
+                      <Field
+                        name="address.street"
+                        component={RestaurantTextField}
+                        label={t("restaurant.field.address.street") + " *"}
+                      />
+                      <FormErrorMessage>
+                        {props.getFieldMeta("address.street").error}
+                      </FormErrorMessage>
+                    </FormControl>
+
+                    <FormControl
+                      isInvalid={
+                        (props.getFieldMeta("address.number").error &&
+                          props.getFieldMeta("address.number").touched) ||
+                        false
+                      }
+                    >
+                      <FormLabel fontSize={{ base: "18x", md: "20px" }}>
+                        {t("restaurant.field.address.number")}
+                      </FormLabel>
+                      <Field
+                        name="address.number"
+                        component={RestaurantTextField}
+                        label={t("restaurant.field.address.number") + " *"}
+                      />
+                      <FormErrorMessage>
+                        {props.getFieldMeta("address.number").error}
+                      </FormErrorMessage>
+                    </FormControl>
+
+                    <FormControl
+                      isInvalid={
+                        (props.getFieldMeta("address.neighborhood").error &&
+                          props.getFieldMeta("address.neighborhood").touched) ||
+                        false
+                      }
+                    >
+                      <FormLabel fontSize={{ base: "18x", md: "20px" }}>
+                        {t("restaurant.field.address.neighborhood")}
+                      </FormLabel>
+                      <Field
+                        name="address.neighborhood"
+                        component={RestaurantTextField}
+                        label={
+                          t("restaurant.field.address.neighborhood") + " *"
+                        }
+                      />
+                      <FormErrorMessage>
+                        {props.getFieldMeta("address.neighborhood").error}
+                      </FormErrorMessage>
+                    </FormControl>
+
+                    <FormControl
+                      isInvalid={
+                        (props.getFieldMeta("address.city").error &&
+                          props.getFieldMeta("address.city").touched) ||
+                        false
+                      }
+                    >
+                      <FormLabel fontSize={{ base: "18x", md: "20px" }}>
+                        {t("restaurant.field.address.city")}
+                      </FormLabel>
+                      <Field
+                        name="address.city"
+                        component={RestaurantTextField}
+                        label={t("restaurant.field.address.city") + " *"}
+                      />
+                      <FormErrorMessage>
+                        {props.getFieldMeta("address.city").error}
+                      </FormErrorMessage>
+                    </FormControl>
+
+                    <FormControl
+                      isInvalid={
+                        (props.getFieldMeta("address.state").error &&
+                          props.getFieldMeta("address.state").touched) ||
+                        false
+                      }
+                    >
+                      <FormLabel fontSize={{ base: "18x", md: "20px" }}>
+                        {t("restaurant.field.address.state")}
+                      </FormLabel>
+                      <Field
+                        name="address.state"
+                        component={RestaurantTextField}
+                        label={t("restaurant.field.address.state") + " *"}
+                      />
+                      <FormErrorMessage>
+                        {props.getFieldMeta("address.state").error}
+                      </FormErrorMessage>
+                    </FormControl>
                   </>
                 )}
                 {activeStep === 3 && (
                   <>
-                    <Field
-                      name="website"
-                      component={RestaurantTextField}
-                      label={t("restaurant.field.website")}
-                    />
-                    <Field
-                      name="image"
-                      component={RestaurantTextField}
-                      label={t("restaurant.field.image")}
-                    />
+                    <FormControl
+                      isInvalid={
+                        (props.getFieldMeta("website").error &&
+                          props.getFieldMeta("website").touched) ||
+                        false
+                      }
+                    >
+                      <FormLabel fontSize={{ base: "18x", md: "20px" }}>
+                        {t("restaurant.field.website")}
+                      </FormLabel>
+                      <Field
+                        name="website"
+                        component={RestaurantTextField}
+                        label={t("restaurant.field.website")}
+                      />
+                      <FormErrorMessage>
+                        {props.getFieldMeta("website").error}
+                      </FormErrorMessage>
+                    </FormControl>
+
+                    <FormControl
+                      isInvalid={
+                        (props.getFieldMeta("image").error &&
+                          props.getFieldMeta("image").touched) ||
+                        false
+                      }
+                    >
+                      <FormLabel fontSize={{ base: "18x", md: "20px" }}>
+                        {t("restaurant.field.image")}
+                      </FormLabel>
+                      <Field
+                        name="image"
+                        component={RestaurantTextField}
+                        label={t("restaurant.field.image")}
+                      />
+                      <FormErrorMessage>
+                        {props.getFieldMeta("image").error}
+                      </FormErrorMessage>
+                    </FormControl>
                   </>
                 )}
               </VStack>

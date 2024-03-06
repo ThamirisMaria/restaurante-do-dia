@@ -52,7 +52,7 @@ export const useValidation = (
       return Yup.object({
         name: Yup.string()
           .trim()
-          .required(t("authentication.validation.missing.name"))
+          .required(t("restaurant.validation.name"))
           .min(2, t("authentication.validation.invalid.name")),
         description: Yup.string().trim().required("Description is required"),
         website: Yup.string().url("Invalid URL"),

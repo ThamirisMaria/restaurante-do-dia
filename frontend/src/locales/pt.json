@@ -75,6 +75,9 @@
         "state": "UF"
       }
     },
+    "validation": {
+      "name": "Digite o nome"
+    },
     "steps": {
       "name-description": "Nome e Descrição",
       "address": "Endereço",

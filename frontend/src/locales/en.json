@@ -74,6 +74,9 @@
         "city": "City",
         "state": "State"
       },
+      "validation": {
+        "name": "Name is required"
+      },
       "steps": {
         "name-description": "Name and Description",
         "address": "Address",
@@ -82,6 +85,9 @@
         "next": "Next",
         "toast": "Invalid fields found"
       }
+    },
+    "validation": {
+      "name": "Name is required"
     }
   },
   "error": {

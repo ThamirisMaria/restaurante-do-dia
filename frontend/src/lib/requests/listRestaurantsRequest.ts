@@ -49,19 +49,20 @@ interface ListRestaurantResponse {
   empty: boolean;
 }
 
-interface ListRestaurantRequest {
+interface ListAvailableRestaurantsRequest {
   accessToken: string | null;
   page: number;
   size: number;
   sort: string;
 }
 
-export async function listRestaurantRequest(
-  page: ListRestaurantRequest["page"]
+export async function listAvailableRestaurantsRequest(
+  page: ListAvailableRestaurantsRequest["page"]
 ): Promise<[Error | undefined, Restaurant[] | undefined]> {
   try {
     const response = await http.get<ListRestaurantResponse>("/restaurant", {
       params: {
+        blocked: false,
         page,
         size: 6,
         sort: "votes,desc",
