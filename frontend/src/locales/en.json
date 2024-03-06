@@ -74,15 +74,39 @@
         "city": "City",
         "state": "State"
       },
+      "validation": {
+        "name": "Name is required"
+      },
       "steps": {
         "name-description": "Name and Description",
         "address": "Address",
         "media": "Media",
+        "previous": "Previous",
+        "next": "Next",
         "toast": "Invalid fields found"
       }
+    },
+    "validation": {
+      "name": "Name is required"
     }
   },
   "error": {
-    "unauthorized": "Error - Unauthorized"
-  }
+    "unauthorized": "Error - Unauthorized",
+    "unexpected": "An unexpected error has occurred, try to reload the page!"
+  },
+  "voting": {
+    "closed": "Voting is closed!",
+    "result": {
+      "restaurant": "Checkout the restaurant of the day",
+      "votes": "votes out of"
+    },
+    "history": "Voting history",
+    "no_votes": "No restaurants were voted today, come back tomorrow for a new voting",
+    "vote": "Vote",
+    "view_result": "View result",
+    "first-to-vote": "Be the first to vote",
+    "in-progress": "Voting in progress",
+    "most-voted-restaurant": "Most voted restaurant"
+  },
+  "voted_for": "voted for"
 }

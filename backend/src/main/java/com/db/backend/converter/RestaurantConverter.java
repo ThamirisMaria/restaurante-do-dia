@@ -21,12 +21,17 @@ public class RestaurantConverter implements EntityDTOConverter<Restaurant, Resta
 
   @Override
   public RestaurantDTO convertToDTO(Restaurant restaurant) {
+    if (restaurant == null) {
+      return null;
+    }
+
     return new RestaurantDTO(
         restaurant.getName(),
         restaurant.getDescription(),
         restaurant.getWebsite(),
         restaurant.getImage(),
-        addressConverter.convertToDTO(restaurant.getAddress()));
+        addressConverter.convertToDTO(restaurant.getAddress()),
+        restaurant.getWinnerBlock());
   }
 
   @Override

@@ -35,6 +35,7 @@ public class Vote {
   private Restaurant restaurant;
 
   @ManyToOne
+  @JoinColumn(name = "voting_id")
   private Voting voting;
 
   public Vote(@NotNull User user, @NotNull Restaurant restaurant, @NotNull Voting voting) {

@@ -79,7 +79,7 @@ export function AuthenticateUserPage() {
   };
 
   return (
-    <VStack>
+    <VStack paddingTop="10vh" paddingBottom="8vh">
       <Heading as="h1">{t("authentication.login")}</Heading>
       {message && <Message {...message} />}
       <Form

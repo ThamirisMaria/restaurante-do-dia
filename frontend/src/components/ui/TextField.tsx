@@ -5,20 +5,15 @@ import {
   Input,
 } from "@chakra-ui/react";
 import { useField } from "formik";
-import { ChangeEventHandler } from "react";
 
 interface TextFieldProps {
-  label?: string;
-  onChange?: ChangeEventHandler<HTMLInputElement> | undefined;
+  label: string;
   name: string;
   type?: string;
   placeholder: string;
-  width?: {};
-  value?: string;
-  readOnly?: boolean;
 }
 
-const TextField = ({ label, onChange, ...props }: TextFieldProps) => {
+const TextField = ({ label, ...props }: TextFieldProps) => {
   const [field, meta] = useField(props);
   return (
     <FormControl isInvalid={(meta.error && meta.touched) || false}>
@@ -28,7 +23,6 @@ const TextField = ({ label, onChange, ...props }: TextFieldProps) => {
         h={{ base: "50px", md: "52px" }}
         {...field}
         {...props}
-        onChange={onChange}
       />
       <FormErrorMessage>{meta.error}</FormErrorMessage>
     </FormControl>

@@ -59,7 +59,12 @@ public class RestaurantService {
   }
 
   public Page<RestaurantDTO> getRestaurantsByWinnerBlockSortedByVotes(Boolean winnerBlock, Pageable pageable) {
-    Page<Restaurant> restaurantsPage = restaurantRepository.findByWinnerBlockSortedByVotes(winnerBlock, pageable);
+    if (winnerBlock) {
+      Page<Restaurant> restaurantsPage = restaurantRepository.findByWinnerBlockIsTrue(pageable);
+      return restaurantsPage.map(restaurantConverter::convertToDTO);
+    }
+
+    Page<Restaurant> restaurantsPage = restaurantRepository.findByWinnerBlockIsFalse(pageable);
     return restaurantsPage.map(restaurantConverter::convertToDTO);
   }
 

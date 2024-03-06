@@ -28,7 +28,7 @@ public class VotingService {
   @Autowired
   private RestaurantService restaurantService;
 
-  public Voting getCurrentVoting() {
+  protected Voting getCurrentVotingEntity() {
     LocalDateTime votingStart = LocalDate.now().atStartOfDay();
 
     Voting voting = votingRepository.findByOpeningDateTime(votingStart);
@@ -40,6 +40,12 @@ public class VotingService {
     }
 
     return voting;
+  }
+
+  public VotingDTO getCurrentVoting() {
+    Voting currentVoting = getCurrentVotingEntity();
+    VotingDTO votingDTO = votingConverter.convertToDTO(currentVoting);
+    return votingDTO;
   }
 
   private Voting createVoting() {
@@ -78,7 +84,7 @@ public class VotingService {
   }
 
   public VotingDTO addVoteToCurrentVoting(Vote vote) {
-    Voting currentVoting = getCurrentVoting();
+    Voting currentVoting = getCurrentVotingEntity();
 
     currentVoting.getVotes().add(vote);
 

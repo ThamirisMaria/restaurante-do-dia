@@ -37,7 +37,18 @@ export function Navigation() {
   };
 
   return (
-    <Flex as="nav" alignItems="center">
+    <Flex
+      as="nav"
+      alignItems="center"
+      textAlign="center"
+      position="fixed"
+      right={0}
+      top={0}
+      width="100%"
+      zIndex="100"
+      height="10vh"
+      bgColor="white"
+    >
       <Tooltip
         label={t("home-page")}
         bgColor={bgColor}

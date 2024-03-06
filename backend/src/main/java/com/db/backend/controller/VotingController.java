@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.db.backend.entity.Voting;
+import com.db.backend.dto.VotingDTO;
 import com.db.backend.infra.exception.DuplicateVotingException;
 import com.db.backend.service.VotingService;
 
@@ -21,7 +21,7 @@ public class VotingController {
   @GetMapping("/current")
   public ResponseEntity<Object> getCurrentVoting() {
     try {
-      Voting voting = votingService.getCurrentVoting();
+      VotingDTO voting = votingService.getCurrentVoting();
 
       return ResponseEntity.ok(voting);
     } catch (DuplicateVotingException e) {
