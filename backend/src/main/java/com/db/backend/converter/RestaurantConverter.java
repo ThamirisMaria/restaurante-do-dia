@@ -30,7 +30,8 @@ public class RestaurantConverter implements EntityDTOConverter<Restaurant, Resta
         restaurant.getDescription(),
         restaurant.getWebsite(),
         restaurant.getImage(),
-        addressConverter.convertToDTO(restaurant.getAddress()));
+        addressConverter.convertToDTO(restaurant.getAddress()),
+        restaurant.getWinnerBlock());
   }
 
   @Override
