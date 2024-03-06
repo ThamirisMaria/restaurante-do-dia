@@ -14,16 +14,16 @@ public class FullNameValidator implements ConstraintValidator<FullName, String>{
   @Override
   public boolean isValid(String fullName, ConstraintValidatorContext context) {
       if (fullName == null || fullName.trim().isEmpty()) {
-          return false;
-      }
+        return false;
+     }
 
       String[] names = fullName.trim().split("\\s+");
       if (names.length < 2) {
-          return false;
+        return false;
       }
 
       for (String name : names) {
-          if (name.length() < 2) {
+        if (name.length() < 2) {
               return false;
           }
       }
