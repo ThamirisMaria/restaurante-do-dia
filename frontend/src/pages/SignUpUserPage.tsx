@@ -84,7 +84,7 @@ export const SignUpUserPage = () => {
       }}
     >
       {(props: FormikProps<Values>) => (
-        <VStack>
+        <VStack paddingTop="10vh" paddingBottom="8vh">
           <Heading fontSize={{ base: "30px", sm: "40px", md: "45px" }} as="h1">
             {t("authentication.signup")}
           </Heading>

@@ -11,6 +11,7 @@ import { SignUpUserPage } from "./pages/SignUpUserPage";
 import { VotingPage } from "./pages/VotingPage";
 import { useAuth } from "./hooks/useAuth";
 import { ErrorUnauthorized } from "./components/error/ErrorUnauthorized";
+import Footer from "./components/ui/Footer";
 
 export function App() {
   const { i18n } = useTranslation();
@@ -33,7 +34,9 @@ export function App() {
           path="/voting"
           element={accessToken ? <VotingPage /> : <ErrorUnauthorized />}
         />
+        <Route path="/errorUnauthorized" element={<ErrorUnauthorized />} />
       </Routes>
+      <Footer />
     </Router>
   );
 }

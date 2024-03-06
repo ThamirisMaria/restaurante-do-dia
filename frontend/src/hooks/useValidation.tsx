@@ -53,11 +53,7 @@ export const useValidation = (
         name: Yup.string()
           .trim()
           .required(t("authentication.validation.missing.name"))
-          .min(2, t("authentication.validation.invalid.name"))
-          .matches(
-            /^[a-zA-Z\s]*$/,
-            t("authentication.validation.invalid.name")
-          ),
+          .min(2, t("authentication.validation.invalid.name")),
         description: Yup.string().trim().required("Description is required"),
         website: Yup.string().url("Invalid URL"),
         image: Yup.string().url("Invalid URL"),
