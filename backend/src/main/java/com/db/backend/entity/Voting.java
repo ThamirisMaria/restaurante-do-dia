@@ -21,15 +21,14 @@ import lombok.Setter;
 
 @Table(name = "Votings")
 @Entity(name = "Votings")
+@Getter
+@Setter
 public class Voting {
   @Id
   @GeneratedValue(strategy = GenerationType.SEQUENCE)
-  @Getter
   private Long id;
 
   @OneToMany(mappedBy = "voting", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-  @Getter
-  @Setter
   private List<Vote> votes = new ArrayList<>();
 
   @Column
@@ -42,13 +41,9 @@ public class Voting {
 
   @Column
   @NotNull
-  @Getter
-  @Setter
   private Boolean closed = false;
 
   @ManyToOne
-  @Getter
-  @Setter
   private Restaurant winningRestaurant;
 
   public Voting() {
