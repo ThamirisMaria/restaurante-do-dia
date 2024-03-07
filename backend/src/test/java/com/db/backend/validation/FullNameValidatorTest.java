@@ -3,13 +3,7 @@ package com.db.backend.validation;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
-//import org.junit.Assert;
-//import org.junit.runner.RunWith;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-//import org.mockito.Mockito.mock;
-//import org.mockito.InjectMocks;
-//import org.mockito.Mock;
-//import org.mockito.runners.MockitoJUnitRunner;
 
 
 public class FullNameValidatorTest {
