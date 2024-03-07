@@ -11,7 +11,7 @@ import com.db.backend.repository.UserRepository;
 @Service
 public class UserService {
 
-  @Autowired
+  @Autowired  //vai buscar do framework e injetar aqui
   private UserRepository repository;
 
   public boolean existsByEmail(String email) {
