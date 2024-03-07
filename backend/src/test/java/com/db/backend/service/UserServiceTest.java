@@ -38,10 +38,8 @@ public class UserServiceTest {
     }
 
     @Test
-    public void test2() {
-
+    public void existsByEmail_should_return_false_for_nonexisting_email() {
      var result = service.existsByEmail ("julia@gmail.com");   
         assertEquals(false, result);
-
     }
 }  
