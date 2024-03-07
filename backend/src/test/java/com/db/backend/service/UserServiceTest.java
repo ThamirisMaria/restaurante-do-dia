@@ -28,13 +28,12 @@ public class UserServiceTest {
 
 
     @Test
-    public void test1() {
+    public void existsByEmail_should_return_true_for_existing_email() {
         when(repository.findByEmail("julia@gmail.com"))
             .thenReturn(userDetails);
-
+            
      var result = service.existsByEmail ("julia@gmail.com");   
         assertEquals(true, result);
-
     }
 
     @Test
