@@ -98,4 +98,25 @@ class VoteServiceTest {
     verify(voteRepository, times(1)).save(vote);
   }
 
+  @Test
+  void registerVote_should_not_create_vote_for_blocked_restaurant() {
+    restaurant.setWinnerBlock(true);
+    when(votingService.getCurrentVotingEntity()).thenReturn(currentVoting);
+    when(voteService.getRestaurantToVote(any())).thenReturn(restaurant);
+
+    assertThrows(InvalidVoteException.class, () -> {
+      voteService.registerVote(user, restaurantDTO);
+    });
+  }
+
+  @Test
+  void registerVote_should_not_create_vote_for_closed_voting() {
+    currentVoting.setClosed(true);
+    when(votingService.getCurrentVotingEntity()).thenReturn(currentVoting);
+    when(voteService.getRestaurantToVote(any())).thenReturn(restaurant);
+
+    assertThrows(InvalidVoteException.class, () -> {
+      voteService.registerVote(user, restaurantDTO);
+    });
+  }
 }
