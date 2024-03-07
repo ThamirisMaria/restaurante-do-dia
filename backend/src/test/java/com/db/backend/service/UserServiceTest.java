@@ -4,15 +4,11 @@ package com.db.backend.service;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
-//import org.junit.Assert;
-//import org.junit.runner.RunWith;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-//import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.InjectMocks;
-//import org.mockito.runners.MockitoJUnitRunner;
 import  org.junit.jupiter.api.extension.ExtendWith;
 import  org.mockito.junit.jupiter.MockitoExtension;
 import com.db.backend.repository.UserRepository;
