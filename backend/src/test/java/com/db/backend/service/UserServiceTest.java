@@ -25,8 +25,6 @@ public class UserServiceTest {
     @Mock
     private UserDetails userDetails;
 
-
-
     @Test
     public void existsByEmail_should_return_true_for_existing_email() {
         when(repository.findByEmail("julia@gmail.com"))
