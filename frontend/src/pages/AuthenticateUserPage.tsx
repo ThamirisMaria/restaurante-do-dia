@@ -1,11 +1,11 @@
 import { FormEvent, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 import { authenticateRequest } from "@/lib/requests";
 import { Message, MessageProps } from "@/components/ui/Message";
 import { useAuth } from "@/hooks";
 import { useTranslation } from "react-i18next";
-import { Button, Heading, VStack } from "@chakra-ui/react";
+import { Button, Heading, VStack, Text } from "@chakra-ui/react";
 import { Form } from "react-bootstrap";
 
 type InputRefs = {
@@ -79,7 +79,7 @@ export function AuthenticateUserPage() {
   };
 
   return (
-    <VStack paddingTop="10vh" paddingBottom="8vh">
+    <VStack paddingTop="10vh" paddingBottom="8vh" minH="90.8vh">
       <Heading as="h1">{t("authentication.login")}</Heading>
       {message && <Message {...message} />}
       <Form
@@ -109,6 +109,14 @@ export function AuthenticateUserPage() {
             ref={inputRefs.password}
           />
         </Form.Group>
+        <Text>
+          {t("authentication.no-account")}
+          <Link to=".././signup">
+            <Text as="span" color="green">
+              {t("authentication.signup")}
+            </Text>
+          </Link>
+        </Text>
         <Form.Group>
           <Button
             colorScheme="green"

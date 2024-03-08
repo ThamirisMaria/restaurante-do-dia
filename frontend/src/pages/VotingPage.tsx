@@ -157,10 +157,10 @@ export const VotingPage = () => {
                 {restaurants.length === 0 ? (
                   <VStack>
                     <Heading as="h1" fontSize={40}>
-                      Bem-vindo(a) ao Restaurante do Dia
+                      {t("welcome.message")}
                     </Heading>
                     <Heading as="h2" fontSize={30}>
-                      Adicione restaurantes para iniciar a votação
+                      {t("welcome.action.add-restaurants")}
                     </Heading>
                     <RegisterRestaurantForm />
                   </VStack>

@@ -44,7 +44,8 @@
       "last-name": "Doe",
       "email": "jhondoe@exemple.com",
       "password": "********"
-    }
+    },
+    "no-account": "Don't have an account? "
   },
   "nav": {
     "app-name": "Restaurant Of The Day",
@@ -108,5 +109,12 @@
     "in-progress": "Voting in progress",
     "most-voted-restaurant": "Most voted restaurant"
   },
-  "voted_for": "voted for"
+  "voted_for": "voted for",
+  "welcome": {
+    "message": "Welcome to Restaurant Of The Day",
+    "action": {
+      "login": "Please login to help your colleagues choose the best restaurant",
+      "add-restaurants": "Add restaurants to start the voting"
+    }
+  }
 }

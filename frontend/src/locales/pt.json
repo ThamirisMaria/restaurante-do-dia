@@ -44,7 +44,8 @@
       "last-name": "da Silva",
       "email": "joaodasilva@exemplo.com",
       "password": "********"
-    }
+    },
+    "no-account": "Não tem conta? "
   },
   "nav": {
     "app-name": "Restaurante Do Dia",
@@ -105,5 +106,12 @@
     "in-progress": "Votação em andamento",
     "most-voted-restaurant": "Restaurante mais votado"
   },
-  "voted_for": "votou em"
+  "voted_for": "votou em",
+  "welcome": {
+    "message": "Bem-vindo(a) ao Restaurante do Dia",
+    "action": {
+      "login": "Entre e ajude seus colegas a escolher o melhor restaurante",
+      "add-restaurants": "Adicione restaurantes para iniciar a votação"
+    }
+  }
 }
