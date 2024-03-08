@@ -1,0 +1,117 @@
+{
+  "home-page": "Página Inicial",
+  "message": {
+    "error": {
+      "invalid-credentials": {
+        "login": "A autenticação falhou devido à credenciais inválidas",
+        "signup": "E-mail já cadastrado"
+      }
+    },
+    "info": {
+      "email-or-password-missing": "Por favor, preencha os campos de Email e Senha"
+    },
+    "warning": {
+      "verify-network-connection": "Por favor, verifique sua conexão com a internet"
+    },
+    "success": {
+      "signup": "Usuário cadastrado com sucesso",
+      "authentication": "Você autenticou com sucesso"
+    }
+  },
+  "authentication": {
+    "login": "Entrar",
+    "email": "E-mail",
+    "password": "Senha",
+    "signup": "Cadastrar",
+    "name": "Nome",
+    "last-name": "Sobrenome",
+    "validation": {
+      "missing": {
+        "name": "Digite seu nome",
+        "last-name": "Digite seu sobrenome",
+        "email": "Digite seu e-mail",
+        "password": "Digite sua senha"
+      },
+      "invalid": {
+        "name": "Nome inválido",
+        "last-name": "Sobrenome inválido",
+        "email": "Digite um e-mail válido",
+        "password": "Senha precisa ter entre 8 e 12 caracteres"
+      }
+    },
+    "placeholder": {
+      "name": "João",
+      "last-name": "da Silva",
+      "email": "joaodasilva@exemplo.com",
+      "password": "********"
+    },
+    "no-account": "Não tem conta? "
+  },
+  "nav": {
+    "app-name": "Restaurante Do Dia",
+    "signout": "Sair",
+    "login": "Entrar",
+    "signup": "Cadastrar",
+    "aria-label": {
+      "menu": "Abrir Menu"
+    },
+    "menu": "Menu"
+  },
+  "restaurant": {
+    "add-restaurant": "Adicionar Restaurante",
+    "new-restaurant": "Novo Restaurante",
+    "cancel": "Cancelar",
+    "add": "Adicionar",
+    "field": {
+      "name": "Nome",
+      "description": "Descrição",
+      "website": "Website",
+      "image": "Imagem",
+      "address": {
+        "number": "Nº",
+        "postCode": "CEP",
+        "neighborhood": "Bairro",
+        "street": "Rua",
+        "city": "Cidade",
+        "state": "UF"
+      }
+    },
+    "validation": {
+      "name": "Digite o nome"
+    },
+    "steps": {
+      "name-description": "Nome e Descrição",
+      "address": "Endereço",
+      "media": "Mídia",
+      "previous": "Anterior",
+      "next": "Próximo",
+      "toast": "Campos inválidos encontrados"
+    }
+  },
+  "error": {
+    "unauthorized": "Erro - Não Autorizado",
+    "unexpected": "Um erro inesperado ocorreu, tente recarregar a página!"
+  },
+  "voting": {
+    "closed": "Votação Fechada!",
+    "result": {
+      "restaurant": "Veja o restaurante do dia",
+      "votes": "votos de"
+    },
+    "history": "Histórico da votação",
+    "no_votes": "Nenhum restaurante foi votado hoje, volte amanhã para uma nova votação",
+    "vote": "Votar",
+    "view_result": "Visualizar resultado",
+    "first-to-vote": "Seja a primeira pessoa a votar",
+    "in-progress": "Votação em andamento",
+    "most-voted-restaurant": "Restaurante mais votado"
+  },
+  "voted_for": "votou em",
+  "welcome": {
+    "message": "Bem-vindo(a) ao Restaurante do Dia",
+    "action": {
+      "login": "Entre e ajude seus colegas a escolher o melhor restaurante",
+      "add-restaurants": "Adicione restaurantes para iniciar a votação"
+    }
+  }
+}

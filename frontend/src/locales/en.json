@@ -1,0 +1,120 @@
+{
+  "home-page": "Home Page",
+  "message": {
+    "warning": {
+      "verify-network-connection": "Please check your internet connection"
+    },
+    "success": {
+      "signup": "You have successfully signed up",
+      "authentication": "You have successfully authenticated"
+    },
+    "error": {
+      "invalid-credentials": {
+        "login": "Authentication failed due to invalid credentials",
+        "signup": "E-mail already in use"
+      }
+    },
+    "info": {
+      "email-or-password-missing": "Please provide an Email and a Password"
+    }
+  },
+  "authentication": {
+    "login": "Login",
+    "email": "E-mail",
+    "password": "Password",
+    "signup": "Sign Up",
+    "name": "First Name",
+    "last-name": "Last Name",
+    "validation": {
+      "missing": {
+        "name": "Name  required",
+        "last-name": "Last name required",
+        "email": "E-mail required",
+        "password": "Password required"
+      },
+      "invalid": {
+        "name": "Invalid name",
+        "last-name": "Invalid last name",
+        "email": "Enter a valid e-mail",
+        "password": "Password must be between 8 and 12 characters"
+      }
+    },
+    "placeholder": {
+      "name": "Jhon",
+      "last-name": "Doe",
+      "email": "jhondoe@exemple.com",
+      "password": "********"
+    },
+    "no-account": "Don't have an account? "
+  },
+  "nav": {
+    "app-name": "Restaurant Of The Day",
+    "signout": "Sign out",
+    "login": "Login",
+    "signup": "Sign Up",
+    "aria-label": {
+      "menu": "Open Menu"
+    },
+    "menu": "Menu"
+  },
+  "restaurant": {
+    "add-restaurant": "Add Restaurant",
+    "new-restaurant": "New Restaurant",
+    "cancel": "Cancel",
+    "add": "Add",
+    "field": {
+      "name": "Name",
+      "description": "Description",
+      "website": "Website",
+      "image": "Image",
+      "address": {
+        "number": "Nº",
+        "postCode": "CEP",
+        "neighborhood": "Neighborhood",
+        "street": "Street",
+        "city": "City",
+        "state": "State"
+      },
+      "validation": {
+        "name": "Name is required"
+      },
+      "steps": {
+        "name-description": "Name and Description",
+        "address": "Address",
+        "media": "Media",
+        "previous": "Previous",
+        "next": "Next",
+        "toast": "Invalid fields found"
+      }
+    },
+    "validation": {
+      "name": "Name is required"
+    }
+  },
+  "error": {
+    "unauthorized": "Error - Unauthorized",
+    "unexpected": "An unexpected error has occurred, try to reload the page!"
+  },
+  "voting": {
+    "closed": "Voting is closed!",
+    "result": {
+      "restaurant": "Checkout the restaurant of the day",
+      "votes": "votes out of"
+    },
+    "history": "Voting history",
+    "no_votes": "No restaurants were voted today, come back tomorrow for a new voting",
+    "vote": "Vote",
+    "view_result": "View result",
+    "first-to-vote": "Be the first to vote",
+    "in-progress": "Voting in progress",
+    "most-voted-restaurant": "Most voted restaurant"
+  },
+  "voted_for": "voted for",
+  "welcome": {
+    "message": "Welcome to Restaurant Of The Day",
+    "action": {
+      "login": "Please login to help your colleagues choose the best restaurant",
+      "add-restaurants": "Add restaurants to start the voting"
+    }
+  }
+}

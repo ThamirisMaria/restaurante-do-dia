@@ -5,10 +5,23 @@
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Restaurantes</title>
+    <meta name="description" content="Website that helps you pick the best restaurant to go to with your friends">
+    <title>Restaurante Do Dia</title>
   </head>
   <body>
     <div id="root"></div>
+    <div vw class="enabled">
+      <div vw-access-button class="active"></div>
+      <div vw-plugin-wrapper>
+        <div class="vw-plugin-top-wrapper"></div>
+      </div>
+    </div>
+    <!-- <a  href="https://icons8.com/icon/57193/talheres">logo</a> icon by <a href="https://icons8.com">Icons8</a> Lembrar de colocar no rodapé-->
+    <!-- <a href="https://storyset.com/web">Web illustrations by Storyset</a> on Freepik Lembrar de colocar no rodapé-->
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+      new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
