@@ -186,16 +186,20 @@ export const VotingPage = () => {
                                   <Heading size="sm">{restaurant.name}</Heading>
                                 </Box>
                               </Flex>
-                              <Link to={restaurant.website} target="_blank">
-                                <IconButton
-                                  bgColor="#2F855A"
-                                  color="white"
-                                  _hover={{ bgColor: "#226845" }}
-                                  variant="outline"
-                                  aria-label="ExternalLinkIcon"
-                                  icon={<ExternalLinkIcon />}
-                                />
-                              </Link>
+                              {restaurant.website ? (
+                                <Link to={restaurant.website} target="_blank">
+                                  <IconButton
+                                    bgColor="#2F855A"
+                                    color="white"
+                                    _hover={{ bgColor: "#226845" }}
+                                    variant="outline"
+                                    aria-label="ExternalLinkIcon"
+                                    icon={<ExternalLinkIcon />}
+                                  />
+                                </Link>
+                              ) : (
+                                <></>
+                              )}
                             </Flex>
                           </CardHeader>
                           <Image
@@ -203,7 +207,7 @@ export const VotingPage = () => {
                             marginRight={5}
                             marginLeft={5}
                             src={restaurant.image}
-                            alt="Chakra UI"
+                            alt="restaurant image"
                           />
                           <CardBody>
                             <Text>{restaurant.description}</Text>
@@ -328,4 +332,3 @@ export const VotingPage = () => {
     </HStack>
   );
 };
-//numero de votos no ícone
