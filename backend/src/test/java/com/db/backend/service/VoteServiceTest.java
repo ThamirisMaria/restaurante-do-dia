@@ -20,6 +20,7 @@ import com.db.backend.repository.UserRepository;
 import com.db.backend.repository.VoteRepository;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -166,5 +167,47 @@ class VoteServiceTest {
     assertEquals(restaurantDTO.name(), restaurantToVote.getName());
     assertEquals(restaurantDTO.address().number(), restaurantToVote.getAddress().getNumber());
     assertEquals(restaurantDTO.address().postCode(), restaurantToVote.getAddress().getPostCode());
+  }
+
+  @Test
+  void getExistingVote_should_return_empty_if_current_voting_has_no_votes() {
+    User user = new User();
+    user.setEmail("user@example.com");
+
+    Optional<Vote> existingVote = voteService.getExistingVote(currentVoting, user);
+
+    assertTrue(existingVote.isEmpty());
+  }
+
+  @Test
+  void getExistingVote_should_return_empty_if_user_hasnt_voted_in_current_voting() {
+    User user = new User();
+    user.setEmail("user@example.com");
+
+    Vote vote = new Vote();
+    vote.setUser(new User());
+    vote.getUser().setEmail("otheruser@example.com");
+
+    currentVoting.getVotes().add(vote);
+
+    Optional<Vote> result = voteService.getExistingVote(currentVoting, user);
+
+    assertTrue(result.isEmpty());
+  }
+
+  @Test
+  void getExistingVote_should_return_users_vote_in_current_voting() {
+    User user = new User();
+    user.setEmail("user@example.com");
+
+    Vote vote = new Vote();
+    vote.setUser(user);
+
+    currentVoting.getVotes().add(vote);
+
+    Optional<Vote> result = voteService.getExistingVote(currentVoting, user);
+
+    assertTrue(result.isPresent());
+    assertEquals(user.getEmail(), result.get().getUser().getEmail());
   }
 }
