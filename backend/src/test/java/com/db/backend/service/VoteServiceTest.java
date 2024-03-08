@@ -10,6 +10,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import com.db.backend.converter.RestaurantConverter;
 import com.db.backend.dto.AddressDTO;
 import com.db.backend.dto.RestaurantDTO;
+import com.db.backend.entity.Address;
 import com.db.backend.entity.Restaurant;
 import com.db.backend.entity.User;
 import com.db.backend.entity.Vote;
@@ -118,5 +119,52 @@ class VoteServiceTest {
     assertThrows(InvalidVoteException.class, () -> {
       voteService.registerVote(user, restaurantDTO);
     });
+  }
+
+  @Test
+  void getRestaurantToVote_should_return_same_restaurant_from_dto() {
+    Restaurant restaurant = new Restaurant(restaurantDTO.name(),
+        restaurantDTO.description(),
+        restaurantDTO.website(),
+        restaurantDTO.image(),
+        new Address(
+            addressDTO.number(),
+            addressDTO.postCode(),
+            addressDTO.neighborhood(),
+            addressDTO.street(),
+            addressDTO.city(),
+            addressDTO.state()));
+
+    when(restaurantConverter.getExistingRestaurant(restaurantDTO)).thenReturn(restaurant);
+
+    Restaurant restaurantToVote = voteService.getRestaurantToVote(restaurantDTO);
+
+    assertEquals(restaurant, restaurantToVote);
+  }
+
+  @Test
+  void getRestaurantToVote_should_create_restaurant_from_dto_if_doesnt_exist() {
+    Restaurant restaurant = new Restaurant(restaurantDTO.name(),
+        restaurantDTO.description(),
+        restaurantDTO.website(),
+        restaurantDTO.image(),
+        new Address(
+            addressDTO.number(),
+            addressDTO.postCode(),
+            addressDTO.neighborhood(),
+            addressDTO.street(),
+            addressDTO.city(),
+            addressDTO.state()));
+
+    when(restaurantConverter.getExistingRestaurant(restaurantDTO)).thenReturn(null);
+    when(restaurantService.registerRestaurant(restaurantDTO)).thenReturn(restaurantDTO);
+    when(restaurantConverter.convertToEntity(restaurantDTO)).thenReturn(restaurant);
+
+    Restaurant restaurantToVote = voteService.getRestaurantToVote(restaurantDTO);
+
+    assertNotNull(restaurantToVote);
+    assertEquals(restaurantDTO.name(), restaurantToVote.getName());
+    assertEquals(restaurantDTO.address().number(), restaurantToVote.getAddress().getNumber());
+    assertEquals(restaurantDTO.address().postCode(), restaurantToVote.getAddress().getPostCode());
   }
 }
